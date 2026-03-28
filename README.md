@@ -1,6 +1,6 @@
 # Omni-Channel AI Booking Agent
 
-An enterprise-grade, autonomous booking assistant that integrates seamlessly with **WhatsApp** and **Telegram**. Powered by **FastAPI** and **Google Gemini 2.5 Flash**, it qualifies leads and books appointments directly into your database.
+An enterprise-grade, autonomous booking assistant that integrates seamlessly with **WhatsApp** and **Telegram**. Powered by **FastAPI** and **Google Gemini 1.5 Flash**, it qualifies leads and books appointments directly into your database.
 
 ---
 
@@ -9,7 +9,7 @@ An enterprise-grade, autonomous booking assistant that integrates seamlessly wit
 ### Backend (The Brain)
 - **FastAPI**: High-performance asynchronous API framework.
 - **SQLAlchemy**: Robust ORM for database management.
-- **Google Gemini 2.5 Flash**: State-of-the-art AI for natural conversation and JSON extraction.
+- **Google Gemini 1.5 Flash**: State-of-the-art AI for natural conversation and JSON extraction.
 - **Twilio API**: WhatsApp Business integration.
 - **Telegram Bot API**: Instant messaging connectivity.
 

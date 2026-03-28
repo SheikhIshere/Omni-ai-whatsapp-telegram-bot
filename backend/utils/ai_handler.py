@@ -8,7 +8,7 @@ from core.settings import settings
 class GeminiHandler:
     def __init__(self):
         self.client = genai.Client(api_key=settings.GEMINI_API_KEY)
-        self.model_name = 'gemini-2.5-flash'
+        self.model_name = 'gemini-1.5-flash'
         self.system_instruction = (
             "You are a plumbing assistant. Your goal is to help users with their plumbing issues and book appointments. "
             "If the user asks a question, answer it concisely. "
