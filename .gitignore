@@ -1,9 +1,9 @@
 # Backend
-backend/venv/
-backend/__pycache__/
-backend/*.pyc
-backend/.env
-backend/omni_demo.db
+venv/
+__pycache__/
+*.pyc
+.env
+omni_demo.db
 
 
 # OS / IDE
@@ -11,3 +11,9 @@ backend/omni_demo.db
 .vscode/
 .idea/
 *.log
+
+
+# frontend/
+node_modules
+.next
+.env.local
