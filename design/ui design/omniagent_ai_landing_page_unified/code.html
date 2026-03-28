@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@700;800&amp;family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "error": "#ba1a1a",
+              "primary-fixed": "#cce5ff",
+              "primary-container": "#007bb9",
+              "primary-fixed-dim": "#93ccff",
+              "outline": "#707881",
+              "outline-variant": "#bfc7d2",
+              "on-tertiary-fixed": "#002109",
+              "surface-container": "#e7eeff",
+              "on-surface": "#111c2d",
+              "on-secondary-fixed": "#00201c",
+              "surface-variant": "#d8e3fb",
+              "on-tertiary-fixed-variant": "#005320",
+              "on-primary-fixed": "#001d31",
+              "tertiary-fixed": "#7ffc97",
+              "background": "#F8FAFC",
+              "on-secondary-container": "#006f64",
+              "on-primary-fixed-variant": "#004b73",
+              "surface-container-low": "#f0f3ff",
+              "on-error-container": "#93000a",
+              "error-container": "#ffdad6",
+              "on-error": "#ffffff",
+              "secondary-container": "#6df5e1",
+              "tertiary-fixed-dim": "#62df7d",
+              "surface-tint": "#006398",
+              "surface-container-lowest": "#ffffff",
+              "inverse-on-surface": "#ecf1ff",
+              "secondary-fixed": "#71f8e4",
+              "surface-dim": "#cfdaf2",
+              "on-tertiary": "#ffffff",
+              "on-tertiary-container": "#f7fff2",
+              "on-primary": "#ffffff",
+              "on-background": "#111c2d",
+              "tertiary": "#16A34A",
+              "surface-container-high": "#dee8ff",
+              "inverse-surface": "#263143",
+              "primary": "#0284C7",
+              "on-secondary": "#ffffff",
+              "tertiary-container": "#00873a",
+              "surface-bright": "#ffffff",
+              "on-secondary-fixed-variant": "#005048",
+              "surface": "#F8FAFC",
+              "on-primary-container": "#fdfcff",
+              "surface-container-highest": "#d8e3fb",
+              "secondary": "#14B8A6",
+              "secondary-fixed-dim": "#4fdbc8",
+              "on-surface-variant": "#3f4850",
+              "inverse-primary": "#93ccff"
+            },
+            fontFamily: {
+              "headline": ["Manrope"],
+              "body": ["Inter"],
+              "label": ["Inter"]
+            },
+            borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px"},
+          },
+        },
+      }
+    </script>
+<style>
+      .material-symbols-outlined {
+        font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+      }
+      .bg-gradient-signature {
+        background: linear-gradient(135deg, #0284C7 0%, #007bb9 100%);
+      }
+      .text-gradient-signature {
+        background: linear-gradient(135deg, #0284C7 0%, #14B8A6 100%);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+      }
+      .message-bubble-incoming {
+        border-radius: 1.5rem 1.5rem 1.5rem 0.25rem;
+      }
+      .message-bubble-outgoing {
+        border-radius: 1.5rem 1.5rem 0.25rem 1.5rem;
+      }
+    </style>
+</head>
+<body class="bg-background font-body text-on-surface">
+<!-- TopNavBar -->
+<nav class="sticky top-0 z-50 w-full bg-slate-50/80 dark:bg-slate-950/80 backdrop-blur-sm shadow-sm dark:shadow-none tonal-shift bg-slate-100 dark:bg-slate-900">
+<div class="flex justify-between items-center px-6 py-4 max-w-7xl mx-auto">
+<div class="text-xl font-extrabold tracking-tighter text-sky-700 dark:text-sky-400 font-headline">
+                OmniAgent AI
+            </div>
+<div class="hidden md:flex items-center space-x-8">
+<a class="text-sky-700 dark:text-sky-400 border-b-2 border-sky-600 pb-1 font-headline font-bold tracking-tight" href="#">Features</a>
+<a class="text-slate-600 dark:text-slate-400 hover:text-sky-600 dark:hover:text-sky-300 transition-colors font-headline font-bold tracking-tight" href="#">Live Demo</a>
+<a class="text-slate-600 dark:text-slate-400 hover:text-sky-600 dark:hover:text-sky-300 transition-colors font-headline font-bold tracking-tight" href="#">About Developer</a>
+</div>
+<div class="flex items-center space-x-4">
+<button class="hidden lg:block px-5 py-2 text-sm font-bold text-on-primary bg-gradient-signature rounded-full shadow-md active:scale-95 duration-200 ease-in-out">
+                    Hire on Upwork
+                </button>
+<div class="flex items-center space-x-2 text-slate-600 dark:text-slate-400">
+<span class="material-symbols-outlined" data-icon="account_circle">account_circle</span>
+</div>
+</div>
+</div>
+</nav>
+<main>
+<!-- Hero Section -->
+<section class="relative pt-20 pb-32 px-6 overflow-hidden">
+<div class="max-w-7xl mx-auto text-center">
+<div class="inline-flex items-center gap-2 px-4 py-1.5 mb-8 rounded-full bg-secondary-container text-on-secondary-container text-[10px] font-bold uppercase tracking-widest">
+<span class="material-symbols-outlined text-[14px]" style="font-variation-settings: 'FILL' 1;">bolt</span>
+                    Powered by OpenAI &amp; FastAPI
+                </div>
+<h1 class="text-5xl md:text-7xl font-extrabold tracking-tight font-headline max-w-5xl mx-auto mb-8">
+<span class="text-gradient-signature">Turn WhatsApp &amp; Telegram</span>
+<br/> into your best sales rep.
+                </h1>
+<p class="text-lg md:text-xl text-on-surface-variant max-w-2xl mx-auto mb-12">
+                    Automate lead qualification and appointment booking with enterprise-grade agents that live where your customers talk.
+                </p>
+<div class="flex flex-col sm:flex-row items-center justify-center gap-4">
+<button class="w-full sm:w-auto px-8 py-4 bg-gradient-signature text-on-primary font-bold text-lg rounded-xl shadow-lg active:scale-95 transition-all">
+                        Launch Interactive Demo
+                    </button>
+<button class="w-full sm:w-auto px-8 py-4 border-2 border-outline-variant text-on-surface font-bold text-lg rounded-xl hover:bg-surface-container transition-all active:scale-95">
+                        View Tech Stack
+                    </button>
+</div>
+</div>
+<!-- Bento Grid Preview -->
+<div class="max-w-6xl mx-auto mt-24 grid grid-cols-1 md:grid-cols-12 gap-6 px-4">
+<div class="md:col-span-8 bg-surface-container-lowest rounded-3xl p-8 shadow-sm border border-outline-variant/30 flex flex-col justify-between">
+<div>
+<div class="flex items-center gap-3 mb-6">
+<div class="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center">
+<span class="material-symbols-outlined text-primary" data-icon="chat_bubble">chat_bubble</span>
+</div>
+<h3 class="text-xl font-bold font-headline">Natural Conversation Engine</h3>
+</div>
+<div class="space-y-4 mb-8">
+<div class="message-bubble-incoming bg-surface-container p-4 max-w-md text-sm">
+                                "Hi! I'm interested in the premium subscription. Can I pay with crypto?"
+                            </div>
+<div class="message-bubble-outgoing bg-primary text-on-primary p-4 max-w-md ml-auto text-sm">
+                                "Absolutely! We support BTC and ETH. Would you like me to generate a payment link for the Annual plan?"
+                            </div>
+</div>
+</div>
+<img class="rounded-2xl w-full h-48 object-cover opacity-80" data-alt="Futuristic dark blue mesh gradient representing artificial intelligence neural networks with glowing data points" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBDAE__ATmGtDlWa3ob9hpgElrs7-HMBJIGVQ_UZGcoRevJ-D9mX8oyBvvfJ-LycHPg1Yd-74QkaVA7NF5IId5w8zH7wBLg2b7Im_oOGgiLSZ6Ciodsx6KgFhN315cKDmGsV4dySVrMhUUIMZcSndRQaa9M_A4WBzm-fFhUmA1FKx1voR19ncG4cG39IM-X6RmRLY6txV_wa2SalYfX-ffbu2XmYqSA-_hbGgrCkd6kQqApXpaI1baoX4xu_3MFfzepRJ8urF2P2-Xw"/>
+</div>
+<div class="md:col-span-4 bg-inverse-surface text-inverse-on-surface rounded-3xl p-8 shadow-2xl flex flex-col justify-center text-center">
+<span class="material-symbols-outlined text-secondary text-5xl mb-4" data-icon="verified_user" style="font-variation-settings: 'FILL' 1;">verified_user</span>
+<h3 class="text-2xl font-bold font-headline mb-4">99.9% Uptime</h3>
+<p class="text-sm opacity-80 mb-8">High-performance FastAPI backends ensure your agents never sleep.</p>
+<div class="text-4xl font-extrabold text-secondary font-headline">24/7</div>
+<span class="text-[10px] uppercase tracking-widest mt-2">Active Monitoring</span>
+</div>
+</div>
+</section>
+<!-- How It Works -->
+<section class="py-24 bg-surface-container-low">
+<div class="max-w-7xl mx-auto px-6">
+<div class="text-center mb-16">
+<h2 class="text-3xl md:text-4xl font-extrabold font-headline mb-4">How It Works</h2>
+<p class="text-on-surface-variant">Three steps to autonomous sales excellence.</p>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+<!-- Step 1 -->
+<div class="bg-surface-container-lowest p-8 rounded-2xl shadow-sm hover:shadow-md transition-shadow">
+<div class="text-primary font-headline font-extrabold text-5xl mb-6 opacity-20">01</div>
+<h4 class="text-xl font-bold font-headline mb-3">Customer Messages</h4>
+<p class="text-sm text-on-surface-variant leading-relaxed mb-6">OmniAgent connects instantly to your WhatsApp Business or Telegram Bot API to catch every inbound lead.</p>
+<div class="flex items-center gap-2 text-primary font-bold text-xs uppercase tracking-widest">
+<span class="material-symbols-outlined text-sm" data-icon="forum">forum</span>
+                            Real-time Sync
+                        </div>
+</div>
+<!-- Step 2 -->
+<div class="bg-surface-container-lowest p-8 rounded-2xl shadow-sm hover:shadow-md transition-shadow">
+<div class="text-primary font-headline font-extrabold text-5xl mb-6 opacity-20">02</div>
+<h4 class="text-xl font-bold font-headline mb-3">AI Context Engine</h4>
+<p class="text-sm text-on-surface-variant leading-relaxed mb-6">Our proprietary RAG system feeds your business documentation into OpenAI's GPT-4 for hyper-accurate responses.</p>
+<div class="flex items-center gap-2 text-primary font-bold text-xs uppercase tracking-widest">
+<span class="material-symbols-outlined text-sm" data-icon="psychology">psychology</span>
+                            Zero Hallucinations
+                        </div>
+</div>
+<!-- Step 3 -->
+<div class="bg-surface-container-lowest p-8 rounded-2xl shadow-sm hover:shadow-md transition-shadow">
+<div class="text-primary font-headline font-extrabold text-5xl mb-6 opacity-20">03</div>
+<h4 class="text-xl font-bold font-headline mb-3">Auto-Booking</h4>
+<p class="text-sm text-on-surface-variant leading-relaxed mb-6">The agent qualifies the lead and books a meeting directly into your CRM or Google Calendar.</p>
+<div class="flex items-center gap-2 text-primary font-bold text-xs uppercase tracking-widest">
+<span class="material-symbols-outlined text-sm" data-icon="event_available">event_available</span>
+                            Closed-Loop Sales
+                        </div>
+</div>
+</div>
+</div>
+</section>
+<!-- Privacy Banner -->
+<section class="py-20 bg-inverse-surface text-inverse-on-surface overflow-hidden relative">
+<div class="absolute inset-0 opacity-10">
+<div class="grid grid-cols-8 gap-4 p-4 transform -rotate-12 scale-125">
+<div class="h-10 bg-surface-variant rounded-full w-full"></div>
+<div class="h-10 bg-surface-variant rounded-full w-full"></div>
+<div class="h-10 bg-surface-variant rounded-full w-full"></div>
+<div class="h-10 bg-surface-variant rounded-full w-full"></div>
+<div class="h-10 bg-surface-variant rounded-full w-full"></div>
+<div class="h-10 bg-surface-variant rounded-full w-full"></div>
+<div class="h-10 bg-surface-variant rounded-full w-full"></div>
+<div class="h-10 bg-surface-variant rounded-full w-full"></div>
+</div>
+</div>
+<div class="max-w-7xl mx-auto px-6 relative z-10 flex flex-col md:flex-row items-center justify-between gap-12">
+<div class="md:w-1/2">
+<div class="inline-block px-3 py-1 bg-secondary text-on-secondary text-[10px] font-bold uppercase tracking-widest rounded mb-6">Privacy First</div>
+<h2 class="text-3xl md:text-4xl font-extrabold font-headline mb-6">Military-grade data protection.</h2>
+<p class="text-slate-400 leading-relaxed mb-8">We anonymize all PII before it ever hits the AI engine. Your customer's data stays yours, protected by end-to-end encryption and strict data isolation protocols.</p>
+<div class="flex items-center gap-6">
+<div class="flex flex-col">
+<span class="text-2xl font-bold">GDPR</span>
+<span class="text-[10px] uppercase tracking-widest opacity-60">Compliant</span>
+</div>
+<div class="w-px h-10 bg-slate-700"></div>
+<div class="flex flex-col">
+<span class="text-2xl font-bold">SOC2</span>
+<span class="text-[10px] uppercase tracking-widest opacity-60">Certified</span>
+</div>
+</div>
+</div>
+<div class="md:w-1/2 w-full">
+<div class="bg-slate-900/50 backdrop-blur-md p-8 rounded-3xl border border-slate-700 shadow-2xl">
+<div class="flex items-center justify-between mb-6">
+<div class="flex gap-1.5">
+<div class="w-2.5 h-2.5 rounded-full bg-error"></div>
+<div class="w-2.5 h-2.5 rounded-full bg-amber-500"></div>
+<div class="w-2.5 h-2.5 rounded-full bg-tertiary"></div>
+</div>
+<span class="text-[10px] text-slate-500 font-mono">ENCRYPTION_LAYER_v4.0</span>
+</div>
+<div class="space-y-4 font-mono text-xs">
+<div class="flex items-center justify-between p-3 bg-slate-800 rounded-lg">
+<span class="text-slate-400">Incoming Number:</span>
+<span class="text-secondary tracking-widest">+1 (***) ***-8291</span>
+</div>
+<div class="flex items-center justify-between p-3 bg-slate-800 rounded-lg">
+<span class="text-slate-400">Customer Name:</span>
+<span class="text-secondary tracking-widest">J*** D**</span>
+</div>
+<div class="flex items-center justify-between p-3 bg-slate-800 rounded-lg border border-secondary/30">
+<span class="text-slate-400">AI Context Token:</span>
+<span class="truncate ml-4">f7a9...d3e1_mask_active</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+</main>
+<!-- Footer -->
+<footer class="w-full py-12 border-t border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-950 tonal-layering">
+<div class="max-w-7xl mx-auto px-6 flex flex-col md:flex-row justify-between items-center gap-6">
+<div class="flex flex-col items-center md:items-start gap-2">
+<span class="text-lg font-bold text-slate-900 dark:text-slate-100 font-headline">OmniAgent AI</span>
+<p class="font-['Inter'] text-sm text-slate-500 dark:text-slate-400">© 2024 OmniAgent AI. Built for High-Trust Interactions.</p>
+</div>
+<div class="flex flex-wrap justify-center gap-8">
+<a class="font-['Inter'] text-sm text-slate-500 hover:text-sky-500 hover:underline decoration-sky-500 underline-offset-4 transition-opacity duration-300" href="#">Privacy Policy</a>
+<a class="font-['Inter'] text-sm text-slate-500 hover:text-sky-500 hover:underline decoration-sky-500 underline-offset-4 transition-opacity duration-300" href="#">Terms of Service</a>
+<a class="font-['Inter'] text-sm text-slate-500 hover:text-sky-500 hover:underline decoration-sky-500 underline-offset-4 transition-opacity duration-300" href="#">Documentation</a>
+<a class="font-['Inter'] text-sm text-slate-500 hover:text-sky-500 hover:underline decoration-sky-500 underline-offset-4 transition-opacity duration-300" href="#">Support</a>
+</div>
+<div class="flex items-center gap-4">
+<div class="w-8 h-8 rounded-full bg-slate-200 dark:bg-slate-800 flex items-center justify-center text-slate-600 dark:text-slate-400 hover:bg-sky-50 dark:hover:bg-sky-900/30 transition-all cursor-pointer">
+<span class="material-symbols-outlined text-sm" data-icon="share">share</span>
+</div>
+</div>
+</div>
+</footer>
+<!-- BottomNavBar (Mobile Only) -->
+<div class="md:hidden fixed bottom-0 left-0 w-full flex justify-around items-center px-4 pb-safe pt-2 bg-white dark:bg-slate-900 border-t border-slate-200 dark:border-slate-800 shadow-[0_-4px_6px_-1px_rgba(0,0,0,0.1)] z-50 rounded-t-3xl">
+<a class="flex flex-col items-center justify-center bg-sky-100 dark:bg-sky-900/50 text-sky-700 dark:text-sky-200 rounded-2xl px-3 py-1.5 active:scale-95 duration-150 transition-transform" href="#">
+<span class="material-symbols-outlined" data-icon="home" style="font-variation-settings: 'FILL' 1;">home</span>
+<span class="font-['Inter'] text-[10px] font-semibold uppercase tracking-widest mt-1">Home</span>
+</a>
+<a class="flex flex-col items-center justify-center text-slate-500 dark:text-slate-400 px-3 py-1.5 active:bg-slate-100 dark:active:bg-slate-800 rounded-2xl transition-all" href="#">
+<span class="material-symbols-outlined" data-icon="chat_bubble">chat_bubble</span>
+<span class="font-['Inter'] text-[10px] font-semibold uppercase tracking-widest mt-1">Demo</span>
+</a>
+<a class="flex flex-col items-center justify-center text-slate-500 dark:text-slate-400 px-3 py-1.5 active:bg-slate-100 dark:active:bg-slate-800 rounded-2xl transition-all" href="#">
+<span class="material-symbols-outlined" data-icon="person">person</span>
+<span class="font-['Inter'] text-[10px] font-semibold uppercase tracking-widest mt-1">Dev</span>
+</a>
+<a class="flex flex-col items-center justify-center text-slate-500 dark:text-slate-400 px-3 py-1.5 active:bg-slate-100 dark:active:bg-slate-800 rounded-2xl transition-all" href="#">
+<span class="material-symbols-outlined" data-icon="work">work</span>
+<span class="font-['Inter'] text-[10px] font-semibold uppercase tracking-widest mt-1">Hire</span>
+</a>
+</div>
+</body></html>

@@ -1,0 +1,18 @@
+# Backend
+backend/venv/
+backend/__pycache__/
+backend/*.pyc
+backend/.env
+backend/omni_demo.db
+
+# Frontend
+frontend/node_modules/
+frontend/.next/
+frontend/.env*
+frontend/.vercel
+
+# OS / IDE
+.DS_Store
+.vscode/
+.idea/
+*.log

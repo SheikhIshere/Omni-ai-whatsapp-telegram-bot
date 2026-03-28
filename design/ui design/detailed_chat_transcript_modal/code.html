@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Azure Concierge - Chat Transcript</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=Manrope:wght@700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "surface": "#F8FAFC",
+              "inverse-primary": "#93ccff",
+              "on-tertiary": "#ffffff",
+              "on-secondary-fixed-variant": "#005048",
+              "secondary-container": "#6df5e1",
+              "tertiary-fixed": "#7ffc97",
+              "surface-container-high": "#dee8ff",
+              "primary-fixed": "#cce5ff",
+              "on-tertiary-container": "#f7fff2",
+              "secondary": "#14B8A6",
+              "surface-dim": "#cfdaf2",
+              "surface-variant": "#d8e3fb",
+              "on-secondary-fixed": "#00201c",
+              "error": "#ba1a1a",
+              "on-secondary-container": "#006f64",
+              "on-background": "#111c2d",
+              "surface-bright": "#ffffff",
+              "error-container": "#ffdad6",
+              "primary": "#0284C7",
+              "outline": "#707881",
+              "tertiary-fixed-dim": "#62df7d",
+              "on-tertiary-fixed": "#002109",
+              "secondary-fixed-dim": "#4fdbc8",
+              "surface-container-highest": "#d8e3fb",
+              "on-error": "#ffffff",
+              "on-surface": "#111c2d",
+              "surface-tint": "#006398",
+              "on-primary": "#ffffff",
+              "on-primary-container": "#fdfcff",
+              "inverse-surface": "#263143",
+              "primary-fixed-dim": "#93ccff",
+              "outline-variant": "#bfc7d2",
+              "on-surface-variant": "#3f4850",
+              "on-primary-fixed-variant": "#004b73",
+              "primary-container": "#007bb9",
+              "surface-container-low": "#f0f3ff",
+              "on-tertiary-fixed-variant": "#005320",
+              "background": "#F8FAFC",
+              "surface-container": "#e7eeff",
+              "tertiary-container": "#00873a",
+              "tertiary": "#16A34A",
+              "surface-container-lowest": "#ffffff",
+              "on-secondary": "#ffffff",
+              "inverse-on-surface": "#ecf1ff",
+              "secondary-fixed": "#71f8e4",
+              "on-primary-fixed": "#001d31",
+              "on-error-container": "#93000a"
+            },
+            fontFamily: {
+              "headline": ["Manrope"],
+              "body": ["Inter"],
+              "label": ["Inter"]
+            },
+            borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px"},
+          },
+        },
+      }
+    </script>
+<style>
+      .material-symbols-outlined {
+        font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+      }
+      .asymmetric-user {
+        border-radius: 1.5rem 1.5rem 0.25rem 1.5rem;
+      }
+      .asymmetric-ai {
+        border-radius: 1.5rem 1.5rem 1.5rem 0.25rem;
+      }
+    </style>
+</head>
+<body class="bg-surface font-body text-on-background min-h-screen flex flex-col">
+<!-- Top Navigation Anchor (Shared Component) -->
+<header class="bg-white/80 dark:bg-slate-900/80 backdrop-blur-sm shadow-sm docked full-width top-0 sticky z-50 flex justify-between items-center px-6 py-4 w-full">
+<div class="flex items-center gap-4">
+<span class="font-['Manrope'] font-extrabold text-xl text-slate-900 dark:text-slate-50">Azure Concierge</span>
+</div>
+<div class="flex items-center gap-4">
+<button class="text-slate-500 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors p-2 rounded-full active:scale-95 duration-200">
+<span class="material-symbols-outlined">more_vert</span>
+</button>
+<img alt="User Avatar" class="w-8 h-8 rounded-full bg-surface-container" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAUCQQnHJdKj-IOy852rB_DZxhGf5QbGtGGNpgj0ANuKR0O1V6iKe8mkpvc4sC3aNaSIZWMAJ0Lq5ELlig6KrmDV3RcgRhQTQfLJ7youyRJ1UHBw8-dSUXKDtBWEuR7wKfSUgsPUeEu4C3NUn9Wu6VtpFZPAR4ywL3PStgrAyB5yjZ6mBaZI3DnSfvrKwgotSUx0-9AnGyAi1jGAFObFoEYErDjgROvoAA_BbR1DPurFbhMCWPiVzz9DGxmOcELrPpgeEGL-Teg54mT"/>
+</div>
+</header>
+<div class="flex flex-1 overflow-hidden relative">
+<!-- Side Navigation (Shared Component) -->
+<aside class="hidden md:flex flex-col h-screen w-64 fixed left-0 top-0 border-r-0 bg-slate-50 dark:bg-slate-950 py-8 px-4 z-40">
+<div class="mb-8 px-2">
+<h1 class="font-['Manrope'] font-extrabold text-sky-700 dark:text-sky-400 text-lg">Azure Concierge</h1>
+<p class="text-xs text-slate-500 font-semibold uppercase tracking-widest">AI Facilitator</p>
+</div>
+<nav class="flex-1 space-y-1">
+<a class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-600 dark:text-slate-400 hover:text-sky-600 dark:hover:text-sky-300 hover:bg-slate-100 dark:hover:bg-slate-900 transition-all duration-300 ease-in-out font-['Inter'] text-sm font-semibold" href="#">
+<span class="material-symbols-outlined">dashboard</span> Dashboard
+                </a>
+<a class="flex items-center gap-3 px-3 py-2 rounded-lg text-sky-700 dark:text-sky-400 border-r-4 border-sky-600 dark:border-sky-400 bg-sky-50 dark:bg-sky-900/20 transition-all duration-300 ease-in-out font-['Inter'] text-sm font-semibold" href="#">
+<span class="material-symbols-outlined">chat_bubble</span> Transcripts
+                </a>
+<a class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-600 dark:text-slate-400 hover:text-sky-600 dark:hover:text-sky-300 hover:bg-slate-100 dark:hover:bg-slate-900 transition-all duration-300 ease-in-out font-['Inter'] text-sm font-semibold" href="#">
+<span class="material-symbols-outlined">insights</span> Analytics
+                </a>
+<a class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-600 dark:text-slate-400 hover:text-sky-600 dark:hover:text-sky-300 hover:bg-slate-100 dark:hover:bg-slate-900 transition-all duration-300 ease-in-out font-['Inter'] text-sm font-semibold" href="#">
+<span class="material-symbols-outlined">settings</span> Settings
+                </a>
+</nav>
+<div class="mt-auto pt-4 space-y-1 border-t border-slate-200 dark:border-slate-800">
+<button class="w-full flex items-center gap-3 px-3 py-2 rounded-lg text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-900 font-['Inter'] text-sm font-semibold">
+<span class="material-symbols-outlined">help_outline</span> Support
+                </button>
+</div>
+</aside>
+<!-- Main Dashboard Content (The Backdrop) -->
+<main class="flex-1 md:ml-64 p-8 bg-surface">
+<div class="max-w-5xl mx-auto">
+<div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+<div class="p-6 bg-surface-container-lowest rounded-xl shadow-sm border-l-4 border-primary">
+<p class="text-[10px] font-bold uppercase tracking-widest text-outline mb-1">TOTAL SESSIONS</p>
+<h3 class="text-2xl font-headline font-extrabold text-on-surface">1,284</h3>
+</div>
+<div class="p-6 bg-surface-container-lowest rounded-xl shadow-sm border-l-4 border-tertiary">
+<p class="text-[10px] font-bold uppercase tracking-widest text-outline mb-1">DATA EXTRACTION RATE</p>
+<h3 class="text-2xl font-headline font-extrabold text-on-surface">94.2%</h3>
+</div>
+<div class="p-6 bg-surface-container-lowest rounded-xl shadow-sm border-l-4 border-secondary">
+<p class="text-[10px] font-bold uppercase tracking-widest text-outline mb-1">ACTIVE CONCIERGE</p>
+<h3 class="text-2xl font-headline font-extrabold text-on-surface">Online</h3>
+</div>
+</div>
+<div class="bg-surface-container-lowest rounded-xl shadow-sm p-6 overflow-hidden">
+<div class="flex justify-between items-center mb-6">
+<h2 class="text-xl font-headline font-bold text-on-surface">Recent Transcripts</h2>
+</div>
+<div class="space-y-4">
+<div class="flex items-center justify-between p-4 bg-surface-container-low rounded-lg">
+<div class="flex items-center gap-4">
+<div class="w-10 h-10 rounded-full bg-primary-container flex items-center justify-center text-on-primary">
+<span class="material-symbols-outlined">person</span>
+</div>
+<div>
+<p class="font-bold text-on-surface text-sm">+1 (***) ***-8923</p>
+<p class="text-xs text-outline">Leaky pipe repair inquiry</p>
+</div>
+</div>
+<span class="px-3 py-1 bg-secondary/10 text-secondary text-[10px] font-bold uppercase tracking-widest rounded-full">Extracted</span>
+</div>
+<div class="flex items-center justify-between p-4 bg-surface rounded-lg opacity-50">
+<div class="flex items-center gap-4">
+<div class="w-10 h-10 rounded-full bg-slate-200 flex items-center justify-center text-slate-500">
+<span class="material-symbols-outlined">person</span>
+</div>
+<div>
+<p class="font-bold text-on-surface text-sm">+1 (***) ***-4421</p>
+<p class="text-xs text-outline">General Inquiry</p>
+</div>
+</div>
+<span class="px-3 py-1 bg-slate-100 text-slate-400 text-[10px] font-bold uppercase tracking-widest rounded-full">Pending</span>
+</div>
+</div>
+</div>
+</div>
+</main>
+<!-- MODAL OVERLAY: Chat Transcript -->
+<div class="fixed inset-0 z-[60] flex items-center justify-center p-4 bg-black/50 backdrop-blur-sm">
+<div class="bg-surface-bright w-full max-w-2xl rounded-xl shadow-2xl flex flex-col max-h-[921px] overflow-hidden border border-outline-variant/30">
+<!-- Modal Header -->
+<header class="flex items-center justify-between px-6 py-5 border-b border-surface-container">
+<div class="flex items-center gap-3">
+<div class="p-2 bg-primary/10 rounded-lg">
+<span class="material-symbols-outlined text-primary">chat_bubble</span>
+</div>
+<h2 class="font-headline font-bold text-lg tracking-tight text-on-surface">Chat Transcript: +1 (***) ***-8923</h2>
+</div>
+<button class="text-slate-500 hover:bg-slate-100 p-2 rounded-full transition-colors active:scale-95">
+<span class="material-symbols-outlined">close</span>
+</button>
+</header>
+<!-- Scrollable Chat Feed Content -->
+<div class="flex-1 overflow-y-auto p-6 space-y-6 bg-surface/50">
+<!-- User Message -->
+<div class="flex flex-col items-end space-y-1">
+<div class="bg-tertiary text-white asymmetric-user p-4 max-w-[80%] shadow-sm">
+<p class="text-[15px] leading-relaxed">Hi, I have a leaky pipe, can someone fix it tomorrow?</p>
+</div>
+<span class="text-[10px] font-bold uppercase tracking-widest text-outline px-1">10:42 AM • USER</span>
+</div>
+<!-- AI Agent Message -->
+<div class="flex flex-col items-start space-y-1">
+<div class="bg-primary text-white asymmetric-ai p-4 max-w-[80%] shadow-sm">
+<p class="text-[15px] leading-relaxed">Hello! I can certainly help with that. To secure your booking, what is your full name and address?</p>
+</div>
+<span class="text-[10px] font-bold uppercase tracking-widest text-outline px-1">10:42 AM • CONCIERGE</span>
+</div>
+<!-- System Badge -->
+<div class="flex justify-center my-4">
+<div class="bg-secondary/10 border border-secondary/20 rounded-full px-4 py-1.5 flex items-center gap-2">
+<span class="material-symbols-outlined text-secondary text-sm" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+<span class="text-[10px] font-bold text-secondary uppercase tracking-widest">JSON Booking Extracted ✓</span>
+</div>
+</div>
+<!-- User Message -->
+<div class="flex flex-col items-end space-y-1">
+<div class="bg-tertiary text-white asymmetric-user p-4 max-w-[80%] shadow-sm">
+<p class="text-[15px] leading-relaxed">John Smith, 123 Maple St, Springfield.</p>
+</div>
+<span class="text-[10px] font-bold uppercase tracking-widest text-outline px-1">10:43 AM • USER</span>
+</div>
+</div>
+<!-- Footer -->
+<footer class="px-6 py-4 bg-surface-container-low flex justify-end border-t border-surface-container">
+<button class="px-6 py-2.5 bg-on-surface text-surface-bright font-label text-sm font-semibold rounded-lg hover:bg-on-surface-variant transition-all active:scale-95 shadow-md">
+                        Close
+                    </button>
+</footer>
+</div>
+</div>
+</div>
+<!-- Footer Component (Shared) -->
+<footer class="w-full py-4 mt-auto flex justify-center items-center gap-6 font-['Inter'] text-[10px] uppercase tracking-widest font-bold text-slate-400">
+<span>© 2024 Azure Concierge AI</span>
+<a class="hover:underline opacity-80 hover:opacity-100 transition-opacity" href="#">Privacy Policy</a>
+<a class="hover:underline opacity-80 hover:opacity-100 transition-opacity" href="#">Terms of Service</a>
+</footer>
+</body></html>
