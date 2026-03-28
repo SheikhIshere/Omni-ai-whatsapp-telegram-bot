@@ -46,7 +46,7 @@ An enterprise-grade, autonomous booking assistant that integrates seamlessly wit
 4. Configure your `.env` file (see [Environment Variables](#environment-variables)).
 5. Start the server:
    ```bash
-   python run.py
+   python run.py --port 8011
    ```
 
 ### 2. Frontend Configuration
@@ -57,7 +57,7 @@ An enterprise-grade, autonomous booking assistant that integrates seamlessly wit
    ```
 3. Create a `.env.local` file:
    ```
-   NEXT_PUBLIC_API_URL=http://0.0.0.0:8000
+   NEXT_PUBLIC_API_URL=http://0.0.0.0:8011
    ```
 4. Start the development server:
    ```bash
@@ -77,7 +77,7 @@ If you prefer containerized deployment:
 To receive messages from Telegram/Twilio on your local machine:
 1. Start an Ngrok tunnel:
    ```bash
-   ngrok http 8000
+   ngrok http 8011
    ```
 2. Update your webhook URLs in Telegram (BotFather) and Twilio Console to:
    `https://<your-ngrok-id>.ngrok-free.app/webhook/telegram`
