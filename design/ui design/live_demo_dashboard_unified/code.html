@@ -1,0 +1,356 @@
+<!DOCTYPE html><html class="light" lang="en" style=""><head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<title>OmniAgent AI | Live Demo Dashboard</title>
+<!-- Fonts -->
+<link href="https://fonts.googleapis.com" rel="preconnect">
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=Manrope:wght@700;800&amp;display=swap" rel="stylesheet">
+<!-- Material Symbols -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<!-- Tailwind CSS -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "error": "#ba1a1a",
+              "primary-fixed": "#cce5ff",
+              "primary-container": "#007bb9",
+              "primary-fixed-dim": "#93ccff",
+              "outline": "#707881",
+              "outline-variant": "#bfc7d2",
+              "on-tertiary-fixed": "#002109",
+              "surface-container": "#e7eeff",
+              "on-surface": "#111c2d",
+              "on-secondary-fixed": "#00201c",
+              "surface-variant": "#d8e3fb",
+              "on-tertiary-fixed-variant": "#005320",
+              "on-primary-fixed": "#001d31",
+              "tertiary-fixed": "#7ffc97",
+              "background": "#F8FAFC",
+              "on-secondary-container": "#006f64",
+              "on-primary-fixed-variant": "#004b73",
+              "surface-container-low": "#f0f3ff",
+              "on-error-container": "#93000a",
+              "error-container": "#ffdad6",
+              "on-error": "#ffffff",
+              "secondary-container": "#6df5e1",
+              "tertiary-fixed-dim": "#62df7d",
+              "surface-tint": "#006398",
+              "surface-container-lowest": "#ffffff",
+              "inverse-on-surface": "#ecf1ff",
+              "secondary-fixed": "#71f8e4",
+              "surface-dim": "#cfdaf2",
+              "on-tertiary": "#ffffff",
+              "on-tertiary-container": "#f7fff2",
+              "on-primary": "#ffffff",
+              "on-background": "#111c2d",
+              "tertiary": "#16A34A",
+              "surface-container-high": "#dee8ff",
+              "inverse-surface": "#263143",
+              "primary": "#0284C7",
+              "on-secondary": "#ffffff",
+              "tertiary-container": "#00873a",
+              "surface-bright": "#ffffff",
+              "on-secondary-fixed-variant": "#005048",
+              "surface": "#F8FAFC",
+              "on-primary-container": "#fdfcff",
+              "surface-container-highest": "#d8e3fb",
+              "secondary": "#14B8A6",
+              "secondary-fixed-dim": "#4fdbc8",
+              "on-surface-variant": "#3f4850",
+              "inverse-primary": "#93ccff"
+            },
+            fontFamily: {
+              "headline": ["Manrope"],
+              "body": ["Inter"],
+              "label": ["Inter"]
+            },
+            borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px"},
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+            display: inline-block;
+            vertical-align: middle;
+        }
+        .asymmetric-bubble-left {
+            border-radius: 1.5rem 1.5rem 1.5rem 0.25rem;
+        }
+        .asymmetric-bubble-right {
+            border-radius: 1.5rem 1.5rem 0.25rem 1.5rem;
+        }
+        @keyframes pulse-soft {
+            0%, 100% { opacity: 1; transform: scale(1); }
+            50% { opacity: 0.5; transform: scale(1.1); }
+        }
+        .animate-pulse-soft {
+            animation: pulse-soft 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+        }
+    </style>
+</head>
+<body class="bg-background text-on-surface font-body selection:bg-primary-fixed selection:text-on-primary-fixed">
+<!-- TopNavBar -->
+<header class="sticky top-0 z-50 w-full bg-slate-50/80 dark:bg-slate-950/80 backdrop-blur-sm shadow-sm dark:shadow-none">
+<nav class="flex justify-between items-center px-6 py-4 max-w-7xl mx-auto">
+<div class="flex items-center gap-8">
+<span class="text-xl font-extrabold tracking-tighter text-sky-700 dark:text-sky-400 font-headline" style="">OmniAgent AI</span>
+<div class="hidden md:flex items-center gap-6">
+<a class="text-slate-600 dark:text-slate-400 hover:text-sky-600 dark:hover:text-sky-300 transition-colors font-label font-semibold" href="#" style="">Features</a>
+<a class="text-sky-700 dark:text-sky-400 border-b-2 border-sky-600 pb-1 font-label font-semibold" href="#" style="">Live Demo</a>
+<a class="text-slate-600 dark:text-slate-400 hover:text-sky-600 dark:hover:text-sky-300 transition-colors font-label font-semibold" href="#" style="">About Developer</a>
+</div>
+</div>
+<div class="flex items-center gap-3">
+<button class="hidden sm:inline-flex items-center px-4 py-2 text-sm font-bold text-slate-600 hover:bg-sky-50 rounded-lg transition-all active:scale-95 duration-200" style=""><br></button>
+<button class="inline-flex items-center px-5 py-2.5 text-sm font-bold text-white bg-gradient-to-r from-primary to-primary-container rounded-lg shadow-md hover:shadow-lg active:scale-95 transition-all duration-200" style="">Hire on Upwork</button>
+<span class="material-symbols-outlined text-slate-400 cursor-pointer hover:text-primary transition-colors ml-2" data-icon="account_circle" style="">account_circle</span>
+</div>
+</nav>
+</header>
+<main class="max-w-7xl mx-auto px-6 py-8 space-y-12 mb-20">
+<!-- Dashboard Header -->
+<div class="flex flex-col md:flex-row md:items-end justify-between gap-4">
+<div class="space-y-1">
+<div class="flex items-center gap-2">
+<div class="w-2.5 h-2.5 bg-tertiary rounded-full animate-pulse-soft"></div>
+<span class="text-[10px] font-bold uppercase tracking-widest text-tertiary" style="">Live System Status</span>
+</div>
+<h1 class="text-3xl font-extrabold tracking-tight font-headline text-on-surface" style="">Agent Connectivity Hub</h1>
+<p class="text-slate-500 max-w-2xl" style="">Monitor real-time interactions across encrypted messaging platforms and test AI response latency.</p>
+</div>
+<div class="bg-surface-container rounded-xl p-1 flex gap-1">
+<button class="px-4 py-2 text-sm font-bold bg-surface-bright shadow-sm rounded-lg text-primary" style=""><br></button>
+<button class="px-4 py-2 text-sm font-bold text-slate-500 hover:bg-slate-200/50 rounded-lg" style=""><br></button>
+<button class="px-4 py-2 text-sm font-bold text-slate-500 hover:bg-slate-200/50 rounded-lg" style=""><br></button>
+</div>
+</div>
+<!-- Instruction Cards Bento Grid -->
+<div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+<!-- WhatsApp Instruction -->
+<div class="group relative overflow-hidden bg-surface-container-lowest rounded-3xl p-8 shadow-sm border border-transparent hover:border-tertiary/20 transition-all">
+<div class="absolute top-0 right-0 p-6 opacity-10 group-hover:opacity-20 transition-opacity">
+<span class="material-symbols-outlined text-[80px]" data-icon="chat" style="">chat</span>
+</div>
+<div class="relative z-10 flex flex-col h-full justify-between gap-6">
+<div class="space-y-4">
+<div class="w-12 h-12 rounded-2xl bg-tertiary/10 flex items-center justify-center">
+<span class="material-symbols-outlined text-tertiary font-bold" data-icon="whatsapp" style="">forum</span>
+</div>
+<h3 class="text-xl font-bold font-headline" style="">WhatsApp Direct Access</h3>
+<p class="text-slate-500 text-sm leading-relaxed" style="">Send "Hello Omni" to the verified business account below to trigger the concierge flow.</p>
+</div>
+<div class="flex items-center gap-3 bg-surface-container-low p-4 rounded-2xl">
+<span class="text-lg font-mono font-semibold tracking-tight text-on-surface" style="">+1 (555) 934-2022</span>
+<button class="ml-auto flex items-center gap-2 px-3 py-1.5 bg-white border border-outline-variant rounded-lg text-xs font-bold hover:bg-tertiary hover:text-white hover:border-tertiary transition-all active:scale-90" style="">
+<span class="material-symbols-outlined text-sm" data-icon="content_copy" style="">content_copy</span>
+                            Copy
+                        </button>
+</div>
+</div>
+</div>
+<!-- Telegram Instruction -->
+<div class="group relative overflow-hidden bg-surface-container-lowest rounded-3xl p-8 shadow-sm border border-transparent hover:border-primary/20 transition-all">
+<div class="absolute top-0 right-0 p-6 opacity-10 group-hover:opacity-20 transition-opacity">
+<span class="material-symbols-outlined text-[80px]" data-icon="send" style="">send</span>
+</div>
+<div class="relative z-10 flex flex-col h-full justify-between gap-6">
+<div class="space-y-4">
+<div class="w-12 h-12 rounded-2xl bg-primary/10 flex items-center justify-center">
+<span class="material-symbols-outlined text-primary font-bold" data-icon="telegram" style="">send</span>
+</div>
+<h3 class="text-xl font-bold font-headline" style="">Telegram Bot Interface</h3>
+<p class="text-slate-500 text-sm leading-relaxed" style="">Search for the global handle below to start a secure encrypted session with the agent.</p>
+</div>
+<div class="flex items-center gap-3 bg-surface-container-low p-4 rounded-2xl">
+<span class="text-lg font-mono font-semibold tracking-tight text-on-surface" style="">@OmniAgent_LiveBot</span>
+<button class="ml-auto flex items-center gap-2 px-3 py-1.5 bg-white border border-outline-variant rounded-lg text-xs font-bold hover:bg-primary hover:text-white hover:border-primary transition-all active:scale-90" style="">
+<span class="material-symbols-outlined text-sm" data-icon="content_copy" style="">content_copy</span>
+                            Copy
+                        </button>
+</div>
+</div>
+</div>
+</div>
+<!-- Live Connection Feed -->
+<section class="space-y-6">
+<div class="flex items-center justify-between">
+<h2 class="text-xl font-bold font-headline" style="">Live Connection Feed</h2>
+<div class="flex gap-2">
+<span class="px-3 py-1 bg-surface-container-high rounded-full text-[10px] font-bold uppercase tracking-widest text-slate-500" style="">Auto-Refresh On</span>
+</div>
+</div>
+<div class="overflow-hidden bg-surface-container-lowest rounded-3xl shadow-sm border border-slate-100">
+<div class="overflow-x-auto">
+<table class="w-full text-left border-collapse">
+<thead>
+<tr class="bg-surface-container-low/50">
+<th class="px-6 py-4 text-[10px] font-bold uppercase tracking-widest text-slate-400" style="">User / Identity</th>
+<th class="px-6 py-4 text-[10px] font-bold uppercase tracking-widest text-slate-400" style="">Platform</th>
+<th class="px-6 py-4 text-[10px] font-bold uppercase tracking-widest text-slate-400" style="">Status</th>
+<th class="px-6 py-4 text-[10px] font-bold uppercase tracking-widest text-slate-400" style="">Latency</th>
+<th class="px-6 py-4 text-[10px] font-bold uppercase tracking-widest text-slate-400 text-right" style="">Actions</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-slate-50">
+<!-- Row 1 -->
+<tr class="hover:bg-slate-50/50 transition-colors group">
+<td class="px-6 py-4" style="">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-full bg-slate-200 overflow-hidden flex-shrink-0">
+<img alt="User" class="w-full h-full object-cover" data-alt="portrait of a professional man in a minimalist setting with soft natural lighting and neutral background" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDK-Aw7VCF9V31VwTdrP5dVoOyaRXS8UlWoQx-9rIBdkUXR3q5-MIs6wOb3FW5FlEdHhvOkI1yo6N-Q00SiBOzwFVPQLPHalk8ScUHFCgu93QWvscu39vFllUsdoFnVQgrbkkHH72H6xPs546W6k46xlW0nDp58UEbxlLMZq7T1t23qJnGuejMfG76K2GB3K20fjhaCDooOA8Zd0ZJCHxc1MdtUAi8S9PFXdx1awjSrG0xcVwLBju_rnnFNx5WUP5VRMhkaRaBmoSYS" style="">
+</div>
+<div>
+<div class="text-sm font-bold text-on-surface" style="">uid_31565</div>
+<div class="text-[10px] font-medium text-slate-400" style="">ID: 9920-XF</div>
+</div>
+</div>
+</td>
+<td class="px-6 py-4" style="">
+<div class="flex items-center gap-2 px-3 py-1 rounded-full bg-tertiary/10 text-tertiary w-fit">
+<span class="material-symbols-outlined text-sm font-bold" data-icon="whatsapp" style="">chat</span>
+<span class="text-xs font-bold" style="">WhatsApp</span>
+</div>
+</td>
+<td class="px-6 py-4" style="">
+<div class="flex items-center gap-1.5">
+<div class="w-1.5 h-1.5 bg-tertiary rounded-full"></div>
+<span class="text-xs font-semibold text-tertiary" style="">Active Engagement</span>
+</div>
+</td>
+<td class="px-6 py-4 text-xs font-mono font-medium text-slate-500" style="">142ms</td>
+<td class="px-6 py-4 text-right" style="">
+<button class="px-4 py-2 text-xs font-bold text-primary border border-primary/20 rounded-lg hover:bg-primary hover:text-white transition-all" style="">View Chat Details</button>
+</td>
+</tr>
+<!-- Row 2 -->
+<tr class="hover:bg-slate-50/50 transition-colors group">
+<td class="px-6 py-4" style="">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-full bg-slate-200 overflow-hidden flex-shrink-0">
+<img alt="User" class="w-full h-full object-cover" data-alt="professional headshot of a smiling woman with bright warm lighting in a clean office environment" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAX796sPDxSTQ0MENnsSTS0iXksBSjQk3AP4-mMgxx1OaCIJU2OxST4bLM06Qw2jExrqs7Cw6ZCciVDMgNVPwyKkgVWWUG14FnsoxmAf0yRwC6xKvRb6k2HONAfyAUYpApIBsJH_dMvBk8uV-wyvRWarXc_m1sLb5dSDZBmhrqAKzl_9LwY3o0K4nT3WdkbrMvgGkilNLusoSZuELHIli5lD_pEkFx28q-Z-FTsD-KFx9PSUp_iB0nHBMyASdVX7tXVB8DdkIpAnpWW" style="">
+</div>
+<div>
+<div class="text-sm font-bold text-on-surface" style="">uid_16526</div>
+<div class="text-[10px] font-medium text-slate-400" style="">ID: 8831-ML</div>
+</div>
+</div>
+</td>
+<td class="px-6 py-4" style="">
+<div class="flex items-center gap-2 px-3 py-1 rounded-full bg-primary/10 text-primary w-fit">
+<span class="material-symbols-outlined text-sm font-bold" data-icon="send" style="">send</span>
+<span class="text-xs font-bold" style="">Telegram</span>
+</div>
+</td>
+<td class="px-6 py-4" style="">
+<div class="flex items-center gap-1.5">
+<div class="w-1.5 h-1.5 bg-tertiary rounded-full"></div>
+<span class="text-xs font-semibold text-tertiary" style="">Processing</span>
+</div>
+</td>
+<td class="px-6 py-4 text-xs font-mono font-medium text-slate-500" style="">89ms</td>
+<td class="px-6 py-4 text-right" style="">
+<button class="px-4 py-2 text-xs font-bold text-primary border border-primary/20 rounded-lg hover:bg-primary hover:text-white transition-all" style="">View Chat Details</button>
+</td>
+</tr>
+<!-- Row 3 -->
+<tr class="hover:bg-slate-50/50 transition-colors group">
+<td class="px-6 py-4" style="">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-full bg-slate-200 overflow-hidden flex-shrink-0">
+<img alt="User" class="w-full h-full object-cover" data-alt="portrait of a man with a friendly expression in soft overcast outdoor lighting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCOKhxE9MGt9IaxiusWGGPT9zB-J66NzqfNpY3dMIz4JyvHupfLQFFqgWqPnDokWhgVolTdLGr7NQBCgFOxIJGcn69Yvyp5rYNupzIxzQT3dmUcoCiTmrIcxhqgqc7c-MxjVugNoWAOnq7HWjLb2dGHq00GbsMPKrkgaDcMISoqWl_m7RMoFyhJKhZRICwOKhHp2Lw1VzmZh0sPAKmQl_uz_SjC929yutxuxZUd_yJdF5uN58uG0vgc1V1SRvb2I765RjGWcWHhGSGT" style="">
+</div>
+<div>
+<div class="text-sm font-bold text-on-surface" style="">uid_68463</div>
+<div class="text-[10px] font-medium text-slate-400" style="">ID: 7712-BT</div>
+</div>
+</div>
+</td>
+<td class="px-6 py-4" style="">
+<div class="flex items-center gap-2 px-3 py-1 rounded-full bg-primary/10 text-primary w-fit">
+<span class="material-symbols-outlined text-sm font-bold" data-icon="send" style="">send</span>
+<span class="text-xs font-bold" style="">Telegram</span>
+</div>
+</td>
+<td class="px-6 py-4" style="">
+<div class="flex items-center gap-1.5">
+<div class="w-1.5 h-1.5 bg-slate-300 rounded-full"></div>
+<span class="text-xs font-semibold text-slate-400" style="">Idle</span>
+</div>
+</td>
+<td class="px-6 py-4 text-xs font-mono font-medium text-slate-500" style="">--</td>
+<td class="px-6 py-4 text-right" style="">
+<button class="px-4 py-2 text-xs font-bold text-primary border border-primary/20 rounded-lg hover:bg-primary hover:text-white transition-all" style="">View Chat Details</button>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</section>
+<!-- Stats Overview Row -->
+<div class="grid grid-cols-2 lg:grid-cols-4 gap-6">
+<div class="bg-surface-container-low p-6 rounded-3xl space-y-2">
+<span class="text-[10px] font-bold uppercase tracking-widest text-slate-400" style="">Total Tokens</span>
+<div class="text-2xl font-extrabold font-headline" style="">1.4M</div>
+<div class="text-[10px] font-bold text-tertiary" style="">+12% this hour</div>
+</div>
+<div class="bg-surface-container-low p-6 rounded-3xl space-y-2">
+<span class="text-[10px] font-bold uppercase tracking-widest text-slate-400" style="">Avg Response</span>
+<div class="text-2xl font-extrabold font-headline" style="">1.2s</div>
+<div class="text-[10px] font-bold text-tertiary" style="">-0.3s optimization</div>
+</div>
+<div class="bg-surface-container-low p-6 rounded-3xl space-y-2">
+<span class="text-[10px] font-bold uppercase tracking-widest text-slate-400" style="">Success Rate</span>
+<div class="text-2xl font-extrabold font-headline" style="">99.9%</div>
+<div class="text-[10px] font-bold text-slate-400" style="">Last 24 hours</div>
+</div>
+<div class="bg-surface-container-low p-6 rounded-3xl space-y-2">
+<span class="text-[10px] font-bold uppercase tracking-widest text-slate-400" style="">Active Agents</span>
+<div class="text-2xl font-extrabold font-headline" style="">12</div>
+<div class="text-[10px] font-bold text-primary" style="">Scalable Load</div>
+</div>
+</div>
+</main>
+<!-- Footer -->
+<footer class="w-full py-12 border-t border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-950 mt-12">
+<div class="max-w-7xl mx-auto px-6 flex flex-col md:flex-row justify-between items-center gap-6">
+<div class="flex flex-col gap-2">
+<span class="text-lg font-bold text-slate-900 dark:text-slate-100 font-headline" style="">OmniAgent AI</span>
+<p class="font-['Inter'] text-sm text-slate-500 dark:text-slate-400" style="">© 2024 OmniAgent AI. Built for High-Trust Interactions.</p>
+</div>
+<div class="flex flex-wrap justify-center gap-6">
+<a class="font-['Inter'] text-sm text-slate-500 hover:text-sky-500 hover:underline decoration-sky-500 underline-offset-4 transition-opacity duration-300" href="#" style="">Privacy Policy</a>
+<a class="font-['Inter'] text-sm text-slate-500 hover:text-sky-500 hover:underline decoration-sky-500 underline-offset-4 transition-opacity duration-300" href="#" style="">Terms of Service</a>
+<a class="font-['Inter'] text-sm text-slate-500 hover:text-sky-500 hover:underline decoration-sky-500 underline-offset-4 transition-opacity duration-300" href="#" style="">Documentation</a>
+<a class="font-['Inter'] text-sm text-slate-500 hover:text-sky-500 hover:underline decoration-sky-500 underline-offset-4 transition-opacity duration-300" href="#" style="">Support</a>
+</div>
+</div>
+</footer>
+<!-- BottomNavBar (Mobile only) -->
+<nav class="md:hidden fixed bottom-0 left-0 w-full flex justify-around items-center px-4 pb-safe pt-2 bg-white dark:bg-slate-900 rounded-t-3xl shadow-[0_-4px_6px_-1px_rgba(0,0,0,0.1)] border-t border-slate-200 dark:border-slate-800 z-50">
+<div class="flex flex-col items-center justify-center text-slate-500 dark:text-slate-400 px-3 py-1.5 active:bg-slate-100 dark:active:bg-slate-800 tap-highlight-transparent transition-transform duration-150">
+<span class="material-symbols-outlined" data-icon="home" style="">home</span>
+<span class="font-['Inter'] text-[10px] font-semibold uppercase tracking-widest mt-1" style="">Home</span>
+</div>
+<div class="flex flex-col items-center justify-center bg-sky-100 dark:bg-sky-900/50 text-sky-700 dark:text-sky-200 rounded-2xl px-3 py-1.5 tap-highlight-transparent transition-transform duration-150">
+<span class="material-symbols-outlined" data-icon="chat_bubble" style="font-variation-settings: &quot;FILL&quot; 1;">chat_bubble</span>
+<span class="font-['Inter'] text-[10px] font-semibold uppercase tracking-widest mt-1" style="">Demo</span>
+</div>
+<div class="flex flex-col items-center justify-center text-slate-500 dark:text-slate-400 px-3 py-1.5 active:bg-slate-100 dark:active:bg-slate-800 tap-highlight-transparent transition-transform duration-150">
+<span class="material-symbols-outlined" data-icon="person" style="">person</span>
+<span class="font-['Inter'] text-[10px] font-semibold uppercase tracking-widest mt-1" style="">Dev</span>
+</div>
+<div class="flex flex-col items-center justify-center text-slate-500 dark:text-slate-400 px-3 py-1.5 active:bg-slate-100 dark:active:bg-slate-800 tap-highlight-transparent transition-transform duration-150">
+<span class="material-symbols-outlined" data-icon="work" style="">work</span>
+<span class="font-['Inter'] text-[10px] font-semibold uppercase tracking-widest mt-1" style="">Hire</span>
+</div>
+</nav>
+</body></html>

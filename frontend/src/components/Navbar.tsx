@@ -1,3 +1,11 @@
+/**
+ * Global Navigation Header (Navbar)
+ * =================================
+ * WHY: Provides persistent access to the main sections of the app.
+ * WHAT: Sticky header with logo, navigation links, and primary CTA.
+ * HOW: Uses 'usePathname' from Next.js to dynamically highlight the active route.
+ */
+
 "use client";
 
 import Link from "next/link";
@@ -6,14 +14,18 @@ import { usePathname } from "next/navigation";
 export default function Navbar() {
   const pathname = usePathname();
 
+  // Helper function to detect if a link is for the current page
   const isActive = (path: string) => pathname === path;
 
   return (
     <nav className="sticky top-0 z-50 w-full bg-slate-50/80 backdrop-blur-sm shadow-sm">
       <div className="flex justify-between items-center px-6 py-4 max-w-7xl mx-auto">
+        {/* Site Branding */}
         <Link href="/" className="text-xl font-extrabold tracking-tighter text-sky-700 font-headline">
           OmniAgent AI
         </Link>
+
+        {/* Desktop Navigation Links */}
         <div className="hidden md:flex items-center space-x-8">
           <Link 
             href="/" 
@@ -34,6 +46,8 @@ export default function Navbar() {
             About Developer
           </Link>
         </div>
+
+        {/* Profile / Primary Action */}
         <div className="flex items-center space-x-4">
           <button className="hidden lg:block px-5 py-2 text-sm font-bold text-white bg-gradient-signature rounded-full shadow-md active:scale-95 duration-200 ease-in-out">
             Hire on Upwork
