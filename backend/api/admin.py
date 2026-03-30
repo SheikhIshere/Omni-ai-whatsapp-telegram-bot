@@ -8,41 +8,21 @@ HOW: Uses FastAPI APIRouter, Jinja2 for server-side rendering, and SQLAlchemy fo
 """
 
 from fastapi import APIRouter, Request, Depends
-from fastapi.templating import Jinja2Templates
 from sqlalchemy.orm import Session
 from core.database import get_db
 from models.models import Appointment, User, ChatHistory
 from pathlib import Path
 
-# --- TEMPLATE CONFIGURATION ---
-# Why: Allows serving a simple, zero-JS HTML dashboard for quick internal status checks.
-BASE_DIR = Path(__file__).resolve().parent.parent
-templates = Jinja2Templates(directory=str(BASE_DIR / "templates"))
-
+# --- API ROUTER ---
 router = APIRouter(prefix="/admin")
-
-@router.get("/dashboard")
-async def dashboard(request: Request, db: Session = Depends(get_db)):
-    """
-    HTML DASHBOARD VIEW
-    - Fetches all appointments and joins with User data.
-    - Renders using the 'dashboard.html' Jinja2 template.
-    """
-    appointments = db.query(Appointment).join(User).all()
-    return templates.TemplateResponse(
-        request=request, 
-        name="dashboard.html", 
-        context={"appointments": appointments}
-    )
 
 @router.get("/api/appointments")
 async def get_appointments(db: Session = Depends(get_db)):
     """
-    JSON API: Fetch all appointments.
-    Why: Used by external tools or frontend components to list bookings.
+    JSON API: Fetch all appointments with user details.
+    Why: Used by the dashboard to show bookings with platform context.
     """
-    appointments = db.query(Appointment).all()
-    # Simple manual serialization to ensure clean JSON output.
+    appointments = db.query(Appointment).join(User).all()
     return [
         {
             "id": a.id,
@@ -50,6 +30,8 @@ async def get_appointments(db: Session = Depends(get_db)):
             "service_needed": a.service_needed,
             "appointment_date": a.appointment_date,
             "customer_address": a.customer_address,
+            "platform": a.user.platform,
+            "platform_id": a.user.platform_id,
             "created_at": a.created_at.isoformat() if a.created_at else None
         } for a in appointments
     ]
@@ -80,7 +62,46 @@ async def get_users(db: Session = Depends(get_db)):
     return [
         {
             "id": u.id,
+            "name": u.name,
+            "username": u.username,
+            "phone": u.phone,
             "platform": u.platform,
-            "platform_id": u.platform_id
+            "platform_id": u.platform_id,
+            "last_seen": u.last_seen.isoformat() if u.last_seen else None
         } for u in users
     ]
+
+
+from utils.twilio_handler import twilio_handler
+import json
+
+# Send WhatsApp Template Test
+@router.post("/api/send-whatsapp-test")
+async def send_whatsapp_test(request: Request):
+    """
+    Triggers the specific Twilio template message requested by user.
+    """
+    data = await request.json()
+    platform_id = data.get("platform_id")
+    content_sid = data.get("content_sid", "HXb5b62575e6e4ff6129ad7c8efe1f983e")
+    content_variables = data.get("content_variables", '{"1":"12/1","2":"3pm"}')
+    
+    if not platform_id:
+        return {"status": "error", "message": "Phone number (platform_id) is required"}
+    
+    sid = twilio_handler.send_whatsapp_template(platform_id, content_sid, content_variables)
+    
+    if sid:
+        return {"status": "success", "message_sid": sid}
+    else:
+        return {"status": "error", "message": "Failed to send message. Check server logs."}
+
+# delete user
+@router.delete("/api/users/{user_id}")
+def delete_user(user_id: int, db: Session = Depends(get_db)):
+    user = db.query(User).filter(User.id == user_id).first()
+    if not user:
+        return {"message": "User not found"}
+    db.delete(user)
+    db.commit()
+    return {"message": "User deleted successfully"}

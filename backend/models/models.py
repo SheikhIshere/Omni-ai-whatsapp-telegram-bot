@@ -23,6 +23,12 @@ class User(Base):
     id = Column(Integer, primary_key=True, index=True)
     platform = Column(String)  # "whatsapp" or "telegram"
     platform_id = Column(String, unique=True, index=True) 
+    
+    # NEW: Metadata for better CRM / Dashboard visibility
+    name = Column(String, nullable=True)      # Real name (if detectable)
+    username = Column(String, nullable=True)  # Platform handle (@username)
+    phone = Column(String, nullable=True)     # Phone number
+    last_seen = Column(DateTime, default=datetime.utcnow, onupdate=datetime.utcnow)
 
     # Relationships: One user can have many chat records and many appointments.
     chat_history = relationship("ChatHistory", back_populates="user")

@@ -8,3 +8,5 @@ python-dotenv
 jinja2
 python-multipart
 psycopg2-binary
+alembic
+

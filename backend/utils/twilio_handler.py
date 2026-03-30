@@ -56,5 +56,37 @@ class TwilioHandler:
             logging.error(f"FATAL: Error sending Twilio message: {e}")
             return False
 
+    def send_whatsapp_template(self, to_number: str, content_sid: str, content_variables: str):
+        """
+        Sends a WhatsApp message using a predefined Content Template.
+        
+        Args:
+            to_number: Recipient phone number (e.g., 'whatsapp:+880...')
+            content_sid: The Twilio SID for the template (e.g., 'HXb5b...')
+            content_variables: JSON string of variables for the template (e.g., '{"1":"12/1","2":"3pm"}')
+        """
+        if not self.client:
+            logging.error("Twilio client not initialized. Check TWILIO_ACCOUNT_SID and TWILIO_AUTH_TOKEN in your .env")
+            return False
+            
+        try:
+            if not to_number.startswith("whatsapp:"):
+                to_number = f"whatsapp:{to_number}"
+                
+            from_number = self.from_whatsapp_number
+            if not from_number.startswith("whatsapp:"):
+                from_number = f"whatsapp:{from_number}"
+
+            message = self.client.messages.create(
+                from_=from_number,
+                content_sid=content_sid,
+                content_variables=content_variables,
+                to=to_number
+            )
+            return message.sid
+        except Exception as e:
+            logging.error(f"FATAL: Error sending Twilio template message: {e}")
+            return False
+
 # Create a single instance to be reused across the application.
 twilio_handler = TwilioHandler()

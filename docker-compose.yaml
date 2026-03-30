@@ -3,20 +3,29 @@ services:
     build:
       context: .
       dockerfile: Dockerfile
+    volumes:
+      - ./backend:/app
     ports:
       - "8011:8011"
     env_file:
       - backend/.env
     restart: always
+    command: sh -c "alembic upgrade head && python run.py"
 
   frontend:
     build:
       context: .
       dockerfile: Dockerfile.frontend
+    volumes:
+      - ./frontend:/app
+      - /app/node_modules
     ports:
       - "3011:3011"
     environment:
-      - NEXT_PUBLIC_API_URL=http://backend:8011
+      - NEXT_PUBLIC_API_URL=http://localhost:8011
+      - PORT=3011
+      - WATCHPACK_POLLING=true
     depends_on:
       - backend
     restart: always
+    command: npm run dev

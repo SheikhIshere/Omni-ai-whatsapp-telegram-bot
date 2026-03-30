@@ -14,6 +14,7 @@ const nextConfig: NextConfig = {
      to automatically memoize components and reduce unnecessary re-renders. 
   */
   reactCompiler: true,
+  allowedDevOrigins: ['172.21.0.3', 'localhost:3011'],
 };
 
 export default nextConfig;

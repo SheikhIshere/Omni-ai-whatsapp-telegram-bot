@@ -92,10 +92,10 @@ export default function AboutPage() {
 
       <main className="relative">
         {/* --- HERO SECTION: Personal Branding --- */}
-        <section className="pt-20 pb-16 px-6 text-center">
+        <section className="pt-12 md:pt-20 pb-12 md:pb-16 px-6 text-center">
           <div className="max-w-4xl mx-auto">
             <div className="inline-block mb-6 relative">
-              <div className="w-32 h-32 relative rounded-full ring-4 ring-primary/20 overflow-hidden mx-auto shadow-2xl">
+              <div className="w-24 h-24 md:w-32 md:h-32 relative rounded-full ring-4 ring-primary/20 overflow-hidden mx-auto shadow-2xl">
                 <Image 
                   alt="Developer Profile" 
                   className="object-cover" 
@@ -103,14 +103,14 @@ export default function AboutPage() {
                   fill
                 />
               </div>
-              <div className="absolute -bottom-2 -right-2 bg-secondary text-white p-2 rounded-full shadow-lg">
-                <span className="material-symbols-outlined text-sm !fill-1">verified</span>
+              <div className="absolute -bottom-1 -right-1 bg-secondary text-white p-1.5 rounded-full shadow-lg">
+                <span className="material-symbols-outlined text-[10px] md:text-sm !fill-1">verified</span>
               </div>
             </div>
-            <h1 className="font-headline text-4xl md:text-5xl font-extrabold tracking-tight text-on-surface mb-4">
+            <h1 className="font-headline text-3xl md:text-5xl font-extrabold tracking-tight text-on-surface mb-4 leading-tight">
               The Blueprint: Omni-Channel AI Booking Agent
             </h1>
-            <p className="text-on-surface-variant text-lg max-w-2xl mx-auto">
+            <p className="text-on-surface-variant text-base md:text-lg max-w-2xl mx-auto">
               A technical deep dive into the architecture powering high-trust AI interactions across web, SMS, and voice.
             </p>
           </div>
@@ -121,22 +121,22 @@ export default function AboutPage() {
         */}
         <section className="py-16 px-6 bg-surface-container-low">
           <div className="max-w-6xl mx-auto">
-            <div className="flex flex-col md:flex-row items-center gap-12">
+            <div className="flex flex-col md:flex-row items-center gap-8 md:gap-12">
               <div className="w-full md:w-1/2">
-                <h2 className="font-headline text-3xl font-bold mb-6 flex items-center gap-3">
-                  <span className="material-symbols-outlined text-primary text-4xl">psychology</span>
+                <h2 className="font-headline text-2xl md:text-3xl font-bold mb-6 flex items-center gap-3">
+                  <span className="material-symbols-outlined text-primary text-3xl md:text-4xl">psychology</span>
                   The FastAPI Brain
                 </h2>
-                <p className="text-on-surface-variant mb-8 text-lg leading-relaxed">
+                <p className="text-on-surface-variant mb-8 text-base md:text-lg leading-relaxed">
                   The core engine is a high-performance FastAPI server orchestrating asynchronous workflows between LLMs, database vectors, and external messaging gateways.
                 </p>
                 {/* Flow Explanation Cards */}
-                <div className="space-y-6">
-                  <div className="flex gap-4 p-5 bg-white rounded-2xl shadow-sm border-l-4 border-primary">
+                <div className="space-y-4 md:space-y-6">
+                  <div className="flex gap-4 p-4 md:p-5 bg-white rounded-2xl shadow-sm border-l-4 border-primary">
                     <div className="bg-primary/10 text-primary w-10 h-10 rounded-lg flex items-center justify-center font-bold flex-shrink-0">01</div>
                     <div>
-                      <h4 className="font-bold text-on-surface mb-1 font-headline">Semantic Ingestion</h4>
-                      <p className="text-sm text-on-surface-variant">User intent is captured via Webhooks and normalized for the Gemini AI pipeline.</p>
+                      <h4 className="font-bold text-on-surface mb-1 font-headline text-sm md:text-base">Semantic Ingestion</h4>
+                      <p className="text-[12px] md:text-sm text-on-surface-variant">User intent is captured via Webhooks and normalized for the Gemini AI pipeline.</p>
                     </div>
                   </div>
                   <div className="flex gap-4 p-5 bg-white rounded-2xl shadow-sm border-l-4 border-secondary">
@@ -156,13 +156,13 @@ export default function AboutPage() {
                 </div>
               </div>
               {/* Code Snippet Visualization */}
-              <div className="w-full md:w-1/2 bg-inverse-surface rounded-3xl p-8 overflow-hidden shadow-2xl">
+              <div className="w-full md:w-1/2 bg-inverse-surface rounded-3xl p-6 md:p-8 overflow-hidden shadow-2xl">
                 <div className="flex gap-2 mb-6">
-                  <div className="w-3 h-3 rounded-full bg-error"></div>
-                  <div className="w-3 h-3 rounded-full bg-amber-500"></div>
-                  <div className="w-3 h-3 rounded-full bg-emerald-500"></div>
+                  <div className="w-2.5 h-2.5 rounded-full bg-error"></div>
+                  <div className="w-2.5 h-2.5 rounded-full bg-amber-500"></div>
+                  <div className="w-2.5 h-2.5 rounded-full bg-emerald-500"></div>
                 </div>
-                <pre className="text-sky-400 font-mono text-sm leading-relaxed overflow-x-auto"><code>{`@app.post("/webhook/telegram")
+                <pre className="text-sky-400 font-mono text-xs md:text-sm leading-relaxed overflow-x-auto"><code>{`@app.post("/webhook/telegram")
 async def telegram_webhook(request: Request, db: Session):
     # 1. Start Trace
     data = await request.json()
@@ -239,16 +239,16 @@ async def telegram_webhook(request: Request, db: Session):
         </section>
 
         {/* --- CTA SECTION --- */}
-        <section className="py-12 px-6">
+        <section className="py-12 md:py-20 px-6">
           <div className="max-w-6xl mx-auto">
-            <div className="bg-inverse-surface rounded-3xl p-12 text-center relative overflow-hidden">
+            <div className="bg-inverse-surface rounded-[2rem] md:rounded-3xl p-8 md:p-12 text-center relative overflow-hidden">
               <div className="relative z-10">
-                <h2 className="font-headline text-3xl font-extrabold text-white mb-6">Need an AI architect for your next project?</h2>
-                <p className="text-slate-300 text-lg mb-8 max-w-xl mx-auto">
+                <h2 className="font-headline text-2xl md:text-3xl font-extrabold text-white mb-6">Need an AI architect for your next project?</h2>
+                <p className="text-slate-300 text-base md:text-lg mb-8 max-w-xl mx-auto">
                   I specialize in building complex, high-trust AI systems that solve real business problems.
                 </p>
-                <button className="bg-gradient-signature text-white px-10 py-4 rounded-xl font-bold text-lg shadow-2xl active:scale-95 transition-all flex items-center gap-3 mx-auto">
-                  Message Me Directly on Upwork
+                <button className="w-full md:w-auto bg-gradient-signature text-white px-10 py-4 rounded-xl font-bold text-base md:text-lg shadow-2xl active:scale-95 transition-all flex items-center justify-center gap-3 mx-auto">
+                  Hire on Upwork
                   <span className="material-symbols-outlined">launch</span>
                 </button>
               </div>
@@ -322,17 +322,17 @@ async def telegram_webhook(request: Request, db: Session):
           How: Uses fixed positioning and a backdrop blur for a premium feel.
       */}
       {selectedUser && (
-        <div className="fixed inset-0 z-[100] flex items-center justify-center p-4 bg-slate-900/60 backdrop-blur-md animate-in fade-in duration-300">
-          <div className="bg-white w-full max-w-2xl h-[85vh] rounded-[3rem] shadow-[0_0_100px_rgba(0,0,0,0.2)] flex flex-col overflow-hidden animate-in zoom-in-95 duration-300 border border-white/20">
+        <div className="fixed inset-0 z-[100] flex items-center justify-center md:p-4 bg-slate-900/60 backdrop-blur-md animate-in fade-in duration-300">
+          <div className="bg-white w-full h-full md:h-[85vh] md:max-w-2xl md:rounded-[3rem] shadow-[0_0_100px_rgba(0,0,0,0.2)] flex flex-col overflow-hidden animate-in zoom-in-95 duration-300 border border-white/20">
             {/* Modal Header */}
-            <div className="p-8 border-b border-slate-100 flex justify-between items-center bg-white/50 backdrop-blur-sm">
+            <div className="p-6 md:p-8 border-b border-slate-100 flex justify-between items-center bg-white/50 backdrop-blur-sm sticky top-0 z-10">
               <div className="flex items-center gap-4">
-                <div className="w-12 h-12 rounded-full bg-slate-100 flex items-center justify-center text-slate-400">
+                <div className="w-10 h-10 md:w-12 md:h-12 rounded-full bg-slate-100 flex items-center justify-center text-slate-400">
                   <span className="material-symbols-outlined">person</span>
                 </div>
                 <div>
-                  <h3 className="font-headline text-2xl font-bold text-slate-900">{selectedUser.platform_id}</h3>
-                  <p className="text-slate-500 text-xs font-semibold uppercase tracking-widest flex items-center gap-2">
+                  <h3 className="font-headline text-lg md:text-2xl font-bold text-slate-900 truncate max-w-[150px] md:max-w-none">{selectedUser.platform_id}</h3>
+                  <p className="text-slate-500 text-[10px] font-semibold uppercase tracking-widest flex items-center gap-2">
                     <span className={`w-1.5 h-1.5 rounded-full ${selectedUser.platform === 'whatsapp' ? 'bg-emerald-500' : 'bg-sky-500'}`}></span>
                     {selectedUser.platform}
                   </p>
@@ -340,33 +340,33 @@ async def telegram_webhook(request: Request, db: Session):
               </div>
               <button 
                 onClick={() => setSelectedUser(null)}
-                className="w-12 h-12 rounded-full bg-slate-50 flex items-center justify-center text-slate-400 hover:bg-slate-100 hover:text-slate-900 transition-all shadow-sm"
+                className="w-10 h-10 md:w-12 md:h-12 rounded-full bg-slate-50 flex items-center justify-center text-slate-400 hover:bg-slate-100 hover:text-slate-900 transition-all shadow-sm"
               >
                 <span className="material-symbols-outlined">close</span>
               </button>
             </div>
 
             {/* Modal Chat Body */}
-            <div className="flex-1 overflow-y-auto p-8 space-y-6 bg-[#F8FAFC]">
+            <div className="flex-1 overflow-y-auto p-4 md:p-8 space-y-6 bg-[#F8FAFC]">
               {loading ? (
                 <div className="h-full flex flex-col items-center justify-center gap-4 text-slate-400">
                   <div className="w-12 h-12 border-4 border-primary/20 border-t-primary rounded-full animate-spin"></div>
-                  <p className="font-bold tracking-tight">Syncing History...</p>
+                  <p className="font-bold tracking-tight text-xs uppercase">Syncing History...</p>
                 </div>
               ) : chatHistory.length > 0 ? (
                 chatHistory.map((chat, idx) => (
                   <div key={idx} className={`flex ${chat.role === 'user' ? 'justify-end' : 'justify-start'}`}>
-                    <div className={`max-w-[85%] p-5 rounded-[1.5rem] shadow-sm text-sm leading-relaxed ${
+                    <div className={`max-w-[90%] md:max-w-[85%] p-4 md:p-5 rounded-[1.5rem] shadow-sm text-xs md:text-sm leading-relaxed ${
                       chat.role === 'user' 
                         ? 'bg-primary text-white rounded-tr-none' 
                         : 'bg-white text-slate-700 border border-slate-100 rounded-tl-none'
                     }`}>
-                      <div className="flex items-center gap-2 mb-2 opacity-50 text-[9px] font-bold uppercase tracking-tighter">
-                        <span className="material-symbols-outlined text-[12px]">{chat.role === 'user' ? 'person' : 'smart_toy'}</span>
+                      <div className="flex items-center gap-2 mb-2 opacity-50 text-[8px] md:text-[9px] font-bold uppercase tracking-tighter">
+                        <span className="material-symbols-outlined text-[10px] md:text-[12px]">{chat.role === 'user' ? 'person' : 'smart_toy'}</span>
                         {chat.role === 'user' ? 'Customer' : 'AI Agent'}
                       </div>
                       <p className="font-medium whitespace-pre-wrap">{chat.message}</p>
-                      <span className={`text-[10px] mt-3 block opacity-60 ${chat.role === 'user' ? 'text-right' : 'text-left'}`}>
+                      <span className={`text-[9px] mt-3 block opacity-60 ${chat.role === 'user' ? 'text-right' : 'text-left'}`}>
                         {new Date(chat.timestamp).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
                       </span>
                     </div>
@@ -375,18 +375,18 @@ async def telegram_webhook(request: Request, db: Session):
               ) : (
                 /* No history found */
                 <div className="h-full flex flex-col items-center justify-center text-slate-400 gap-4">
-                  <div className="w-20 h-20 rounded-full bg-slate-100 flex items-center justify-center">
-                    <span className="material-symbols-outlined text-4xl">cloud_off</span>
+                  <div className="w-16 h-16 md:w-20 md:h-20 rounded-full bg-slate-100 flex items-center justify-center">
+                    <span className="material-symbols-outlined text-3xl md:text-4xl">cloud_off</span>
                   </div>
-                  <p className="font-bold">No Records Found</p>
-                  <p className="text-xs text-center max-w-[200px]">This user hasn't initiated any conversations yet.</p>
+                  <p className="font-bold text-sm">No Records Found</p>
+                  <p className="text-[10px] text-center max-w-[200px]">This user hasn't initiated any conversations yet.</p>
                 </div>
               )}
             </div>
 
             {/* Modal Footer */}
-            <div className="p-6 bg-slate-50 border-t border-slate-100 flex justify-center">
-               <p className="text-[10px] text-slate-400 font-bold uppercase tracking-[0.2em]">End of Conversation Transcript</p>
+            <div className="p-4 md:p-6 bg-slate-50 border-t border-slate-100 flex justify-center sticky bottom-0 z-10">
+               <p className="text-[8px] md:text-[10px] text-slate-400 font-bold uppercase tracking-[0.2em]">End of Conversation Transcript</p>
             </div>
           </div>
         </div>

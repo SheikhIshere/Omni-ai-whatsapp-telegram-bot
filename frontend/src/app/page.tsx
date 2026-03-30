@@ -27,19 +27,19 @@ export default function LandingPage() {
             What: Headline + Subtext + Primary CTA.
             How: Uses a high-contrast gradient and ultra-bold typography.
         */}
-        <section className="relative pt-20 pb-32 px-6 overflow-hidden">
+        <section className="relative pt-12 md:pt-20 pb-20 md:pb-32 px-6 overflow-hidden">
           <div className="max-w-7xl mx-auto text-center">
             {/* Tech Badge */}
-            <div className="inline-flex items-center gap-2 px-4 py-1.5 mb-8 rounded-full bg-secondary-container text-on-secondary-container text-[10px] font-bold uppercase tracking-widest">
+            <div className="inline-flex items-center gap-2 px-4 py-1.5 mb-6 md:mb-8 rounded-full bg-secondary-container text-on-secondary-container text-[10px] font-bold uppercase tracking-widest">
               <span className="material-symbols-outlined text-[14px] !fill-1">bolt</span>
               Powered by Gemini & FastAPI
             </div>
             {/* Main Headline */}
-            <h1 className="text-5xl md:text-7xl font-extrabold tracking-tight font-headline max-w-5xl mx-auto mb-8">
+            <h1 className="text-4xl md:text-7xl font-extrabold tracking-tight font-headline max-w-5xl mx-auto mb-6 md:mb-8 leading-tight">
               <span className="text-gradient-signature">Turn WhatsApp & Telegram</span>
-              <br/> into your best sales rep.
+              <br className="hidden md:block"/> into your best sales rep.
             </h1>
-            <p className="text-lg md:text-xl text-on-surface-variant max-w-2xl mx-auto mb-12">
+            <p className="text-base md:text-xl text-on-surface-variant max-w-2xl mx-auto mb-10 md:mb-12">
               Automate lead qualification and appointment booking with enterprise-grade agents that live where your customers talk.
             </p>
             {/* Action Buttons */}
@@ -57,34 +57,34 @@ export default function LandingPage() {
               Why: Visualizes complex concepts (AI logic) into digestible snippets.
               What: Chat bubbles + Uptime Metric.
           */}
-          <div className="max-w-6xl mx-auto mt-24 grid grid-cols-1 md:grid-cols-12 gap-6 px-4">
+          <div className="max-w-6xl mx-auto mt-16 md:mt-24 grid grid-cols-1 md:grid-cols-12 gap-6 px-4">
             {/* AI Experience Preview */}
-            <div className="md:col-span-8 bg-surface-container-lowest rounded-3xl p-8 shadow-sm border border-outline-variant/30 flex flex-col justify-between">
+            <div className="md:col-span-8 bg-surface-container-lowest rounded-3xl p-6 md:p-8 shadow-sm border border-outline-variant/30 flex flex-col justify-between">
               <div>
                 <div className="flex items-center gap-3 mb-6">
                   <div className="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center">
                     <span className="material-symbols-outlined text-primary">chat_bubble</span>
                   </div>
-                  <h3 className="text-xl font-bold font-headline">Natural Conversation Engine</h3>
+                  <h3 className="text-lg md:text-xl font-bold font-headline">Natural Conversation Engine</h3>
                 </div>
                 {/* Simulated Chat Interface */}
                 <div className="space-y-4 mb-8">
-                  <div className="asymmetric-ai bg-surface-container p-4 max-w-md text-sm">
+                  <div className="asymmetric-ai bg-surface-container p-4 max-w-[90%] md:max-w-md text-xs md:text-sm">
                     "Hi! I'm interested in the premium subscription. Can I pay with crypto?"
                   </div>
-                  <div className="asymmetric-user bg-primary text-white p-4 max-w-md ml-auto text-sm">
+                  <div className="asymmetric-user bg-primary text-white p-4 max-w-[90%] md:max-w-md ml-auto text-xs md:text-sm">
                     "Absolutely! We support BTC and ETH. Would you like me to generate a payment link for the Annual plan?"
                   </div>
                 </div>
               </div>
-              <div className="rounded-2xl w-full h-48 bg-gradient-to-r from-sky-500 to-teal-500 opacity-60 flex items-center justify-center text-white font-bold text-2xl">
+              <div className="rounded-2xl w-full h-32 md:h-48 bg-gradient-to-r from-sky-500 to-teal-500 opacity-60 flex items-center justify-center text-white font-bold text-xl md:text-2xl text-center px-4">
                 OmniAI Core Engine
               </div>
             </div>
             {/* Uptime Stat Box */}
             <div className="md:col-span-4 bg-inverse-surface text-inverse-on-surface rounded-3xl p-8 shadow-2xl flex flex-col justify-center text-center">
               <span className="material-symbols-outlined text-secondary text-5xl mb-4 !fill-1">verified_user</span>
-              <h3 className="text-2xl font-bold font-headline mb-4">99.9% Uptime</h3>
+              <h3 className="text-xl md:text-2xl font-bold font-headline mb-4">99.9% Uptime</h3>
               <p className="text-sm opacity-80 mb-8">High-performance FastAPI backends ensure your agents never sleep.</p>
               <div className="text-4xl font-extrabold text-secondary font-headline">24/7</div>
               <span className="text-[10px] uppercase tracking-widest mt-2">Active Monitoring</span>
@@ -141,12 +141,12 @@ export default function LandingPage() {
             Why: Essential for B2B/Enterprise software sales.
             What: Security standards + Data masking visualization.
         */}
-        <section className="py-20 bg-inverse-surface text-inverse-on-surface overflow-hidden relative">
+        <section className="py-16 md:py-20 bg-inverse-surface text-inverse-on-surface overflow-hidden relative">
           <div className="max-w-7xl mx-auto px-6 relative z-10 flex flex-col md:flex-row items-center justify-between gap-12">
             <div className="md:w-1/2">
               <div className="inline-block px-3 py-1 bg-secondary text-white text-[10px] font-bold uppercase tracking-widest rounded mb-6">Privacy First</div>
               <h2 className="text-3xl md:text-4xl font-extrabold font-headline mb-6">Military-grade data protection.</h2>
-              <p className="text-slate-400 leading-relaxed mb-8">We anonymize all PII before it ever hits the AI engine. Your customer's data stays yours, protected by end-to-end encryption and strict data isolation protocols.</p>
+              <p className="text-slate-400 leading-relaxed mb-8 text-sm md:text-base">We anonymize all PII before it ever hits the AI engine. Your customer's data stays yours, protected by end-to-end encryption and strict data isolation protocols.</p>
               {/* Certifications icons would go here */}
               <div className="flex items-center gap-6">
                 <div className="flex flex-col">

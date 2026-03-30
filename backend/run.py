@@ -14,11 +14,6 @@ from api import webhooks, admin
 from core.database import engine, Base
 import uvicorn
 
-# --- DATABASE INITIALIZATION ---
-# Why: This ensures that the database schema is built as soon as the server starts.
-# if the tables don't exist, SQLAlchemy creates them based on the 'models' definitions.
-Base.metadata.create_all(bind=engine)
-
 # --- APP CONFIGURATION ---
 # The FastAPI instance is the core object that handles all routing and middleware logic.
 app = FastAPI(

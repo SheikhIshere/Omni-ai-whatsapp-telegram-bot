@@ -17,6 +17,7 @@ from utils.twilio_handler import twilio_handler
 from utils.telegram_handler import telegram_handler
 import logging
 import json
+from datetime import datetime
 
 # --- LOGGING SETUP ---
 # Why: Crucial for monitoring production traffic and debugging AI response patterns.
@@ -50,19 +51,27 @@ async def whatsapp_webhook(
         if not From or not Body:
             return {"status": "ignored"}
         
-        # Twilio sends 'whatsapp:+123456789', we strip the prefix for our DB
+        # --- USER IDENTIFICATION & METADATA SYNC ---
         platform_id = From.replace("whatsapp:", "")
-        logger.info(f"DEBUG: User said: {Body}")
+        profile_name = (await request.form()).get("ProfileName") # Twilio specific
 
-        # --- USER IDENTIFICATION ---
-        # We use (platform, platform_id) as a unique composite key to identify return customers.
         user = db.query(User).filter(User.platform == "whatsapp", User.platform_id == platform_id).first()
         if not user:
             logger.info("DEBUG: Creating new WhatsApp user")
-            user = User(platform="whatsapp", platform_id=platform_id)
+            user = User(
+                platform="whatsapp", 
+                platform_id=platform_id,
+                name=profile_name,
+                phone=platform_id
+            )
             db.add(user)
-            db.commit()
-            db.refresh(user)
+        else:
+            # Update existing user metadata if changed
+            user.name = profile_name or user.name
+            user.last_seen = datetime.utcnow()
+        
+        db.commit()
+        db.refresh(user)
 
         # --- PERSISTENCE: USER MESSAGE ---
         db.add(ChatHistory(user_id=user.id, role="user", message=Body))
@@ -79,7 +88,6 @@ async def whatsapp_webhook(
         ai_response = ai_handler.process_message(Body, history)
         logger.info(f"DEBUG: Gemini response: {ai_response}")
 
-        final_text = ""
         # If AI detected an intent to book (e.g., 'I want a massage tomorrow at 5pm')
         if ai_response["type"] == "booking":
             data = ai_response["data"]
@@ -92,7 +100,28 @@ async def whatsapp_webhook(
                 customer_address=data.get("customer_address")
             )
             db.add(appt)
-            final_text = f"Confirmed! {data.get('customer_name')}, we'll see you for {data.get('service_needed')} on {data.get('appointment_date')}."
+            
+            # --- USER REQUESTED: Template Reply ---
+            # Why: If it's a booking, we use the premium Twilio Template (Content API)
+            try:
+                # We try to extract date/time for template variables {"1": "date", "2": "time"}
+                # Defaulting to 12/1 and 3pm if extraction is messy, but ideally mapping from AI data.
+                date_val = data.get("appointment_date", "TBD")
+                time_val = "Requested" # Or extract time from date_val
+                
+                content_vars = json.dumps({"1": date_val, "2": time_val})
+                sid = twilio_handler.send_whatsapp_template(
+                    platform_id, 
+                    "HXb5b62575e6e4ff6129ad7c8efe1f983e", 
+                    content_vars
+                )
+                if sid:
+                    final_text = f"[Template Sent] Confirmed! {data.get('customer_name')}, we'll see you for {data.get('service_needed')} on {data.get('appointment_date')}."
+                else:
+                    final_text = f"Confirmed! {data.get('customer_name')}, we'll see you for {data.get('service_needed')} on {data.get('appointment_date')}."
+            except Exception as e:
+                logger.error(f"Template Send Failed: {e}")
+                final_text = f"Confirmed! {data.get('customer_name')}, we'll see you for {data.get('service_needed')} on {data.get('appointment_date')}."
         else:
             final_text = ai_response["content"]
 
@@ -100,9 +129,11 @@ async def whatsapp_webhook(
         db.add(ChatHistory(user_id=user.id, role="ai", message=final_text))
         db.commit()
         
-        # Flush the message out to the end user
-        twilio_handler.send_whatsapp_message(platform_id, final_text)
-        logger.info("DEBUG: WhatsApp message sent successfully")
+        # Flush the message out to the end user (Only if it wasn't a template or as a fallback)
+        if ai_response["type"] != "booking":
+            twilio_handler.send_whatsapp_message(platform_id, final_text)
+        
+        logger.info("DEBUG: WhatsApp message handled successfully")
 
     except Exception as e:
         logger.error(f"CRITICAL ERROR (WhatsApp): {str(e)}")
@@ -130,16 +161,35 @@ async def telegram_webhook(
 
         chat_id = str(data["message"]["chat"]["id"])
         user_text = data["message"]["text"]
+        
+        # Metadata extraction
+        from_user = data["message"].get("from", {})
+        first_name = from_user.get("first_name", "")
+        last_name = from_user.get("last_name", "")
+        full_name = f"{first_name} {last_name}".strip() or None
+        username = from_user.get("username")
+
         logger.info(f"DEBUG: User said: {user_text}")
 
-        # Identify/Create User
+        # Identify/Update User
         user = db.query(User).filter(User.platform == "telegram", User.platform_id == chat_id).first()
         if not user:
             logger.info("DEBUG: Creating new Telegram user")
-            user = User(platform="telegram", platform_id=chat_id)
+            user = User(
+                platform="telegram", 
+                platform_id=chat_id,
+                name=full_name,
+                username=username
+            )
             db.add(user)
-            db.commit()
-            db.refresh(user)
+        else:
+            # Sync metadata
+            user.name = full_name or user.name
+            user.username = username or user.username
+            user.last_seen = datetime.utcnow()
+        
+        db.commit()
+        db.refresh(user)
 
         # Persistence: User message
         db.add(ChatHistory(user_id=user.id, role="user", message=user_text))

@@ -86,3 +86,4 @@ class GeminiHandler:
 
 # Singleton instance of the handler
 ai_handler = GeminiHandler()
+
