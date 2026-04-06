@@ -6,7 +6,9 @@ services:
     volumes:
       - ./backend:/app
     ports:
-      - "8011:8011"
+      - "8001:8001"
+    environment:
+      - PORT=8001
     env_file:
       - backend/.env
     restart: always
@@ -20,10 +22,10 @@ services:
       - ./frontend:/app
       - /app/node_modules
     ports:
-      - "3011:3011"
+      - "3001:3001"
     environment:
-      - NEXT_PUBLIC_API_URL=http://localhost:8011
-      - PORT=3011
+      - NEXT_PUBLIC_API_URL=http://localhost:8001
+      - PORT=3001
       - WATCHPACK_POLLING=true
     depends_on:
       - backend

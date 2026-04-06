@@ -8,10 +8,13 @@ HOW: It uses Uvicorn as an ASGI server to listen for incoming requests and distr
       to the appropriate routers (webhooks for bot interactions and admin for data management).
 """
 
-from fastapi import FastAPI
+from fastapi import FastAPI, Request
 from fastapi.middleware.cors import CORSMiddleware
 from api import webhooks, admin
 from core.database import engine, Base
+from core.limiter import limiter
+from slowapi.errors import RateLimitExceeded
+from slowapi import _rate_limit_exceeded_handler
 import uvicorn
 
 # --- APP CONFIGURATION ---
@@ -21,6 +24,32 @@ app = FastAPI(
     description="A production-ready AI agent backend for automated bookings via WhatsApp & Telegram.",
     version="1.0.0"
 )
+
+# --- RATE LIMITING ---
+app.state.limiter = limiter
+app.add_exception_handler(RateLimitExceeded, _rate_limit_exceeded_handler)
+
+@app.middleware("http")
+async def capture_request_body(request: Request, call_next):
+    """
+    PRE-PROCESSING: This middleware reads Form or JSON data and attaches it 
+    to the 'request.state' so the rate-limiter can see WHO is messaging.
+    """
+    request.state.form_data = None
+    request.state.json_data = None
+    
+    # Check Content-Type to decide how to parse
+    content_type = request.headers.get("Content-Type", "")
+    if "application/x-www-form-urlencoded" in content_type:
+        request.state.form_data = await request.form()
+    elif "application/json" in content_type:
+        try:
+            request.state.json_data = await request.json()
+        except:
+            pass
+            
+    response = await call_next(request)
+    return response
 
 # --- SECURITY: CORS (Cross-Origin Resource Sharing) ---
 # Why: This allows our frontend (Next.js) to talk to this backend when they are on different domains/ports.

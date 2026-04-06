@@ -75,21 +75,25 @@ async def get_users(db: Session = Depends(get_db)):
 from utils.twilio_handler import twilio_handler
 import json
 
+from schema.admin_schema import WhatsAppTestRequest
+from core.limiter import limiter
+
 # Send WhatsApp Template Test
 @router.post("/api/send-whatsapp-test")
-async def send_whatsapp_test(request: Request):
+@limiter.limit("10/minute") # Rate limit specifically for manual admin testing
+async def send_whatsapp_test(
+    request: Request,
+    payload: WhatsAppTestRequest
+):
     """
     Triggers the specific Twilio template message requested by user.
+    Uses Pydantic validation (WhatsAppTestRequest) for maximum security.
     """
-    data = await request.json()
-    platform_id = data.get("platform_id")
-    content_sid = data.get("content_sid", "HXb5b62575e6e4ff6129ad7c8efe1f983e")
-    content_variables = data.get("content_variables", '{"1":"12/1","2":"3pm"}')
-    
-    if not platform_id:
-        return {"status": "error", "message": "Phone number (platform_id) is required"}
-    
-    sid = twilio_handler.send_whatsapp_template(platform_id, content_sid, content_variables)
+    sid = twilio_handler.send_whatsapp_template(
+        payload.platform_id, 
+        payload.content_sid, 
+        payload.content_variables
+    )
     
     if sid:
         return {"status": "success", "message_sid": sid}

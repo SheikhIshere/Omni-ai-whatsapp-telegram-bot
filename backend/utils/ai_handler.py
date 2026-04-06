@@ -81,8 +81,11 @@ class GeminiHandler:
                 return {"type": "text", "content": response_text}
         
         except Exception as e:
-            # Error handling to prevent the whole webhook from crashing if the AI fails.
-            return {"type": "text", "content": f"AI Engine Error: {str(e)}"}
+            # ERROR HANDLING: We log the technical error but show the user a friendly fallback message.
+            # This prevents technical details or rate-limit errors from leaking to the customer.
+            from .logger import logger
+            logger.error(f"AI CORE FAILURE: {str(e)}")
+            return {"type": "text", "content": "I'm having a little trouble connecting to my brain right now. Can you try again in a few minutes?"}
 
 # Singleton instance of the handler
 ai_handler = GeminiHandler()
