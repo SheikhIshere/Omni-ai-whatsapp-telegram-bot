@@ -9,10 +9,31 @@ services:
       - "8011:8011"
     environment:
       - PORT=8011
+      - DATABASE_URL=postgresql://${POSTGRES_USER:-omni_user}:${POSTGRES_PASSWORD:-omni_pass}@db:5432/${POSTGRES_DB:-omni_db}
     env_file:
       - backend/.env
     restart: always
     command: sh -c "alembic upgrade head && python run.py"
+    depends_on:
+      db:
+        condition: service_healthy
+
+  db:
+    image: postgres:16-alpine
+    restart: always
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER:-omni_user}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-omni_pass}
+      POSTGRES_DB: ${POSTGRES_DB:-omni_db}
+    ports:
+      - "5434:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U omni_user -d omni_db"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
 
   frontend:
     build:
@@ -31,3 +52,6 @@ services:
       - backend
     restart: always
     command: npm run dev
+
+volumes:
+  postgres_data:
