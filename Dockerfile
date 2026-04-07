@@ -11,7 +11,7 @@ RUN pip install --no-cache-dir -r requirements.txt
 COPY backend/ .
 
 # Expose port
-EXPOSE 8001
+EXPOSE 8011
 
 # Run the application
 CMD ["python", "run.py"]
