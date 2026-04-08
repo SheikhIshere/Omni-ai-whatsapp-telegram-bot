@@ -1,7 +1,7 @@
 # Frontend Dockerfile
 FROM node:20-slim
 
-WORKDIR /app
+WORKDIR /app/frontend
 
 # Install dependencies
 COPY frontend/package.json frontend/package-lock.json* ./

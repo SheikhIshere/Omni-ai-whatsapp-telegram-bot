@@ -39,17 +39,18 @@ services:
       context: .
       dockerfile: Dockerfile.frontend
     volumes:
-      - ./frontend:/app
-      - /app/node_modules
+      - .:/app
+      - /app/frontend/node_modules
     ports:
       - "3011:3011"
     environment:
-      - NEXT_PUBLIC_API_URL=http://localhost:8011
+      - NEXT_PUBLIC_API_URL=https://api.omni.nutcrackers.site
       - PORT=3011
       - WATCHPACK_POLLING=true
     depends_on:
       - backend
     restart: always
+    working_dir: /app/frontend
     command: npm run dev
 
 volumes:
