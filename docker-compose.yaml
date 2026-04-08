@@ -13,7 +13,7 @@ services:
     env_file:
       - backend/.env
     restart: always
-    command: sh -c "alembic upgrade head && python run.py"
+    command: sh -c "alembic -c alembic.ini upgrade head && python run.py"
     depends_on:
       db:
         condition: service_healthy

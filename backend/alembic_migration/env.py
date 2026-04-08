@@ -14,6 +14,12 @@ config = context.config
 if config.config_file_name is not None:
     fileConfig(config.config_file_name)
 
+# Attempt to load DATABASE_URL from environment variable for migrations
+import os
+db_url = os.environ.get("DATABASE_URL")
+if db_url:
+    config.set_main_option("sqlalchemy.url", db_url)
+
 import os
 import sys
 sys.path.append(os.getcwd())
