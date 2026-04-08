@@ -1,10 +1,9 @@
 services:
   backend:
+    working_dir: /app
     build:
       context: .
       dockerfile: Dockerfile
-    volumes:
-      - ./backend:/app
     ports:
       - "8011:8011"
     environment:

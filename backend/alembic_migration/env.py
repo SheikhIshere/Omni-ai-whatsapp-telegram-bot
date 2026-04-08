@@ -1,3 +1,6 @@
+import os
+import sys
+
 from logging.config import fileConfig
 
 from sqlalchemy import engine_from_config
@@ -14,20 +17,18 @@ config = context.config
 if config.config_file_name is not None:
     fileConfig(config.config_file_name)
 
-# Attempt to load DATABASE_URL from environment variable for migrations
-import os
+# Override sqlalchemy.url with DATABASE_URL env variable if set (for production)
 db_url = os.environ.get("DATABASE_URL")
 if db_url:
     config.set_main_option("sqlalchemy.url", db_url)
 
-import os
-import sys
 sys.path.append(os.getcwd())
 from models.models import Base
 
 # add your model's MetaData object here
 # for 'autogenerate' support
 target_metadata = Base.metadata
+
 
 # other values from the config, defined by the needs of env.py,
 # can be acquired:
