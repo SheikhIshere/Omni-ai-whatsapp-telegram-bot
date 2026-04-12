@@ -29,7 +29,7 @@ services:
     volumes:
       - postgres_data:/var/lib/postgresql/data
     healthcheck:
-      test: ["CMD-SHELL", "pg_isready -U omni_user -d omni_db"]
+      test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER:-omni_user} -d ${POSTGRES_DB:-omni_db}"]
       interval: 5s
       timeout: 5s
       retries: 5
@@ -38,20 +38,15 @@ services:
     build:
       context: .
       dockerfile: Dockerfile.frontend
-    volumes:
-      - .:/app
-      - /app/frontend/node_modules
     ports:
       - "3011:3011"
     environment:
       - NEXT_PUBLIC_API_URL=https://api.omni.nutcrackers.site
       - PORT=3011
-      - WATCHPACK_POLLING=true
     depends_on:
       - backend
     restart: always
     working_dir: /app/frontend
-    command: npm run dev
 
 volumes:
   postgres_data:

@@ -88,4 +88,4 @@ if __name__ == "__main__":
     import os
     # Port 8011 is customized to avoid conflicts with common 8080/8000 ports.
     port = int(os.environ.get("PORT", 8011))
-    uvicorn.run("run:app", host="0.0.0.0", port=port, reload=True)
+    uvicorn.run("run:app", host="0.0.0.0", port=port, reload=False)
