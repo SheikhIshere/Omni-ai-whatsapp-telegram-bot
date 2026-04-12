@@ -51,7 +51,7 @@ export default function DashboardPage() {
   const [loadingHistory, setLoadingHistory] = useState(false);
   const [copyStatus, setCopyStatus] = useState<string | null>(null);
 
-  const API_URL = process.env.NEXT_PUBLIC_API_URL || "http://localhost:8011";
+  const API_URL = process.env.NEXT_PUBLIC_API_URL || "";
 
   /**
    * INITIAL DATA SYNC

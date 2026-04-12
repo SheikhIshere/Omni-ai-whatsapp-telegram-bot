@@ -40,7 +40,7 @@ export default function AboutPage() {
   const [loading, setLoading] = useState(false);
 
   // Fallback to localhost if the environment variable isn't set.
-  const API_URL = process.env.NEXT_PUBLIC_API_URL || "http://localhost:8011";
+  const API_URL = process.env.NEXT_PUBLIC_API_URL || "";
 
   /**
    * Fetches the list of unique users who have talked to the bot.
