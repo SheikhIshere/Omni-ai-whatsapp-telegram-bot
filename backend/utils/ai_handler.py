@@ -38,38 +38,46 @@ class GeminiHandler:
         """
         Processes a single message within the context of the conversation history.
         
-        1. Formats history for the Gemini API (role mapping: user -> user, ai -> model).
-        2. Calls the generate_content API with the system prompt.
-        3. Parses the output to see if it's natural language or a structured JSON booking.
+        1. Limits history to avoid context overflow.
+        2. Injects system instructions as a 'fake turn' for model compliance.
+        3. Calls the generation API and parses structured JSON output.
         """
-        # --- CONTEXT MAPPING ---
-        # Transform our internal DB history into the format expected by Google GenAI SDK.
-        genai_history = []
+        # Limit history to last 10 turns to avoid context overflow with Gemma
+        history = history[-10:]
+
+        # Inject system prompt as fake first turn (Gemma 3 compatibility)
+        genai_history = [
+            types.Content(
+                role="user",
+                parts=[types.Part(text=self.system_instruction)]
+            ),
+            types.Content(
+                role="model",
+                parts=[types.Part(text="Understood! I am ready to assist customers as a professional plumbing service assistant.")]
+            )
+        ]
+
+        # Append real conversation history after the injected system turn
         for entry in history:
-            # Explicit mapping for Gemma 3 compatibility
             role = "user" if entry["role"] == "user" else "model"
             genai_history.append(
-                types.Content(
-                    role=role,
-                    parts=[types.Part(text=entry["message"])]
-                )
+                types.Content(role=role, parts=[types.Part(text=entry["message"])])
             )
 
         # --- AI INFERENCE ---
         try:
-            # We combine historical context + the latest user message + system rules.
+            # We combine historical context + the latest user message.
+            # config is intentionally empty here as instructions are now in-line.
             response = self.client.models.generate_content(
                 model=self.model_name,
-                contents=genai_history + [types.Content(role="user", parts=[types.Part(text=user_message)])],
-                config=types.GenerateContentConfig(
-                    system_instruction=self.system_instruction,
-                ),
+                contents=genai_history + [
+                    types.Content(role="user", parts=[types.Part(text=user_message)])
+                ],
+                config=types.GenerateContentConfig(), 
             )
             response_text = response.text.strip()
 
             # --- DATA EXTRACTION ---
-            # Why: Sometimes the AI wraps JSON in backticks or includes surrounding text.
-            # We use Regex to isolate the {} block so we can reliably parse it into a Python dict.
             try:
                 json_match = re.search(r'\{.*\}', response_text, re.DOTALL)
                 if json_match:
@@ -83,8 +91,7 @@ class GeminiHandler:
                 return {"type": "text", "content": response_text}
         
         except Exception as e:
-            # ERROR HANDLING: We log the technical error but show the user a friendly fallback message.
-            # This prevents technical details or rate-limit errors from leaking to the customer.
+            # ERROR HANDLING
             from .logger import logger
             logger.error(f"AI CORE FAILURE: {str(e)}")
             return {"type": "text", "content": "I'm having a little trouble connecting to my brain right now. Can you try again in a few minutes?"}
