@@ -67,6 +67,7 @@ async def whatsapp_webhook(
 
         ai_response = ai_handler.process_message(Body, history)
         
+        # Determine the text to save based on response type
         if ai_response["type"] == "booking":
             data = ai_response["data"]
             appt = Appointment(
@@ -89,7 +90,8 @@ async def whatsapp_webhook(
         else:
             final_text = ai_response["content"]
 
-        db.add(ChatHistory(user_id=user.id, role="ai", message=final_text))
+        # CRITICAL: Save the bot's reply so it remembers the conversation
+        db.add(ChatHistory(user_id=user.id, role="model", message=final_text))
         db.commit()
         
         if ai_response["type"] != "booking":
@@ -138,6 +140,7 @@ async def telegram_webhook(
 
         ai_response = ai_handler.process_message(user_text, history)
         
+        # Determine the text to save based on response type
         if ai_response["type"] == "booking":
             data_json = ai_response["data"]
             appt = Appointment(
@@ -152,7 +155,8 @@ async def telegram_webhook(
         else:
             final_text = ai_response["content"]
 
-        db.add(ChatHistory(user_id=user.id, role="ai", message=final_text))
+        # CRITICAL: Save the bot's reply so it remembers the conversation
+        db.add(ChatHistory(user_id=user.id, role="model", message=final_text))
         db.commit()
 
         telegram_handler.send_message(chat_id, final_text)
