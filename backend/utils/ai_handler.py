@@ -26,7 +26,7 @@ class GeminiHandler:
         # Initialize the Google GenAI client using the API key from settings.
         self.client = genai.Client(api_key=settings.GEMINI_API_KEY)
         # Using Gemini 1.5 Flash for the best balance of speed and reasoning.
-        self.model_name = 'gemini-2.5-flash' 
+        self.model_name = 'gemini-1.5-flash' 
         
         # Why: This defines EXACTLY how the AI should behave.
         # It forces the AI to collect specific fields (Name, Address, Date) 

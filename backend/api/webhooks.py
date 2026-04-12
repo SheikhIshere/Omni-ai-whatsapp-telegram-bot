@@ -33,7 +33,7 @@ logger = logging.getLogger(__name__)
 router = APIRouter(prefix="/webhook")
 
 @router.post("/whatsapp")
-@limiter.limit("5/hour", key_func=bot_user_key)
+@limiter.limit("100/hour", key_func=bot_user_key)
 async def whatsapp_webhook(
     request: Request,
     db: Session = Depends(get_db),
@@ -62,7 +62,7 @@ async def whatsapp_webhook(
         db.commit()
         
         history_entries = db.query(ChatHistory).filter(ChatHistory.user_id == user.id)\
-            .order_by(ChatHistory.timestamp.desc()).limit(6).all()
+            .order_by(ChatHistory.timestamp.desc()).limit(11).all()
         history = [{"role": h.role, "message": h.message} for h in reversed(history_entries[1:])]
 
         ai_response = ai_handler.process_message(Body, history)
@@ -102,7 +102,7 @@ async def whatsapp_webhook(
     return {"status": "success"}
 
 @router.post("/telegram")
-@limiter.limit("5/hour", key_func=bot_user_key)
+@limiter.limit("100/hour", key_func=bot_user_key)
 async def telegram_webhook(
     request: Request,
     db: Session = Depends(get_db)
@@ -133,7 +133,7 @@ async def telegram_webhook(
         db.commit()
 
         history_entries = db.query(ChatHistory).filter(ChatHistory.user_id == user.id)\
-            .order_by(ChatHistory.timestamp.desc()).limit(6).all()
+            .order_by(ChatHistory.timestamp.desc()).limit(11).all()
         history = [{"role": h.role, "message": h.message} for h in reversed(history_entries[1:])]
 
         ai_response = ai_handler.process_message(user_text, history)
