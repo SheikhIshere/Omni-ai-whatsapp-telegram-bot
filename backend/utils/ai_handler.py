@@ -46,6 +46,7 @@ class GeminiHandler:
         # Transform our internal DB history into the format expected by Google GenAI SDK.
         genai_history = []
         for entry in history:
+            # Explicit mapping for Gemma 3 compatibility
             role = "user" if entry["role"] == "user" else "model"
             genai_history.append(
                 types.Content(

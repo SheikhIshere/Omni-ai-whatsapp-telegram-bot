@@ -63,7 +63,19 @@ async def whatsapp_webhook(
         
         history_entries = db.query(ChatHistory).filter(ChatHistory.user_id == user.id)\
             .order_by(ChatHistory.timestamp.desc()).limit(11).all()
-        history = [{"role": h.role, "message": h.message} for h in reversed(history_entries[1:])]
+        
+        # Strict Alternation: Ensure history doesn't have consecutive identical roles
+        # and ends with a 'model' role so the next message can be 'user'.
+        history = []
+        last_role = None
+        for h in reversed(history_entries[1:]):
+            role_to_add = "user" if h.role == "user" else "model"
+            if role_to_add != last_role:
+                history.append({"role": role_to_add, "message": h.message})
+                last_role = role_to_add
+        
+        if history and history[-1]["role"] == "user":
+            history.pop()
 
         ai_response = ai_handler.process_message(Body, history)
         
@@ -136,7 +148,19 @@ async def telegram_webhook(
 
         history_entries = db.query(ChatHistory).filter(ChatHistory.user_id == user.id)\
             .order_by(ChatHistory.timestamp.desc()).limit(11).all()
-        history = [{"role": h.role, "message": h.message} for h in reversed(history_entries[1:])]
+        
+        # Strict Alternation: Ensure history doesn't have consecutive identical roles
+        # and ends with a 'model' role so the next message can be 'user'.
+        history = []
+        last_role = None
+        for h in reversed(history_entries[1:]):
+            role_to_add = "user" if h.role == "user" else "model"
+            if role_to_add != last_role:
+                history.append({"role": role_to_add, "message": h.message})
+                last_role = role_to_add
+        
+        if history and history[-1]["role"] == "user":
+            history.pop()
 
         ai_response = ai_handler.process_message(user_text, history)
         
